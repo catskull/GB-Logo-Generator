@@ -3,6 +3,7 @@ var blackFlag = 0;
 var tmp = 0x00;
 var bitFlag = 0;
 var total = [];
+var strings = [];
 var position = 0;
 var bgColor;
 
@@ -59,23 +60,28 @@ function convertToHex() {
         }
 
         if (bitFlag){
-          total[position - 11] = total[position - 11] | tmp;
-          console.log(total[position - 11].toString(16));
+          // console.log(bitFlag);
+          total[position - 12] = (total[position - 12] | tmp);
+          // console.log(total[position - 12].toString(16));
+          strings.push(total[position - 12]);
         }
         else {
+          // console.log("bitflag was false");
           total[position] = tmp;
+          // console.log(list[i]);
           // console.log(total[position].toString(16));
         }
         tmp = 0x00;
         position++;
 
-        if (position%11 == 0){
+        if (position%12 == 0 && position != 0){
           // console.log("setting bit flag");
           bitFlag = !bitFlag;
+          // console.log(list[i]);
         }
-        if (position == 11){
-          console.log(list[i]);
-        }
+        // if (position == 11){
+        //   console.log(list[i]);
+        // }
       }
       if (i%4 == 0 && bgColor == "black"){ // first item in group of 4
         if (bitFlag){
@@ -105,3 +111,50 @@ function convertToHex() {
       }
     }
 }
+
+function hex2a(hexx) {
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; i < hex.length; i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    return str;
+}
+
+
+(function () {
+var textFile = null,
+  makeTextFile = function() {
+    var string = "";
+
+    for (var i = 0; i < strings.length; i++){
+      // console.log(strings[i]);
+      // string += hex2a(strings[i]);
+      // console.log(hex2a(strings[i]));
+      console.log(String.fromCharCode(strings[i]));
+      string += String.fromCharCode(strings[i]);
+      // console.log("ˇ");
+    }
+
+    var data = new Blob([string], {type: 'application/octet-stream'});
+
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (textFile !== null) {
+      window.URL.revokeObjectURL(textFile);
+    }
+
+    textFile = window.URL.createObjectURL(data);
+
+    return textFile;
+  };
+
+
+  var create = document.getElementById('download'),
+    textbox = document.getElementById('textbox');
+
+  create.addEventListener('click', function () {
+    var link = document.getElementById('downloadlink');
+    link.href = makeTextFile();
+    link.style.display = 'block';
+  }, false);
+})();
