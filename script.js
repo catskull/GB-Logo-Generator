@@ -27,7 +27,6 @@ function drag(element){
 }
 
 function fill(element){
-  // console.log("clicked!");
     if (element.style.backgroundColor == "black"){
       element.style.backgroundColor = "white";
       blackFlag = 0;
@@ -112,13 +111,13 @@ function convertToHex() {
     }
 }
 
-function hex2a(hexx) {
-    var hex = hexx.toString();//force conversion
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2)
-        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-    return str;
-}
+// function hex2a(hexx) {
+//     var hex = hexx.toString();//force conversion
+//     var str = '';
+//     for (var i = 0; i < hex.length; i += 2)
+//         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+//     return str;
+// }
 
 
 (function () {
@@ -127,15 +126,16 @@ var textFile = null,
     var string = "";
 
     for (var i = 0; i < strings.length; i++){
-      // console.log(strings[i]);
+      // console.log(strings[i].toString(16));
       // string += hex2a(strings[i]);
       // console.log(hex2a(strings[i]));
-      console.log(String.fromCharCode(strings[i]));
+      // console.log(String.fromCharCode(strings[i]));
       string += String.fromCharCode(strings[i]);
       // console.log("ˇ");
     }
 
-    var data = new Blob([string], {type: 'application/octet-stream'});
+    var data = new Blob([string], {encoding: "ANSI", type: "text/plain;charset=ANSI"});
+    console.log(data);
 
     // If we are replacing a previously generated file we need to
     // manually revoke the object URL to avoid memory leaks.
