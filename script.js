@@ -44,98 +44,93 @@ function invert() {
     }
 }
 
-function convertToHex() {
-    var list = document.getElementsByTagName("TD");
-    for (var i = 0; i < list.length; i++){
-      bgColor = list[i].style.backgroundColor;
-      if (i%4 == 3){ // last item in group of 4
-        if (bgColor == "black"){
-          if (bitFlag){
-            tmp = tmp | 0x01;
-          }
-          else {
-            tmp = tmp | 0x10;
-          }
-        }
-
-        if (bitFlag){
-          // console.log(bitFlag);
-          total[position - 12] = (total[position - 12] | tmp);
-          // console.log(total[position - 12].toString(16));
-          strings.push(total[position - 12]);
-        }
-        else {
-          // console.log("bitflag was false");
-          total[position] = tmp;
-          // console.log(list[i]);
-          // console.log(total[position].toString(16));
-        }
-        tmp = 0x00;
-        position++;
-
-        if (position%12 == 0 && position != 0){
-          // console.log("setting bit flag");
-          bitFlag = !bitFlag;
-          // console.log(list[i]);
-        }
-        // if (position == 11){
-        //   console.log(list[i]);
-        // }
+function convertToHex(){
+  var list = document.getElementsByTagName("TD");
+  var hexString = "";
+  var top = 0;
+  var bottom = 0;
+  for (var block = 0; block < 48; block ++){
+    top = 0;
+    bottom = 0;
+    for (var column = 0; column < 4; column ++){
+      // first add top number
+      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 96) + column].style.backgroundColor;
+      if (bgColor == "black"){
+        top += Math.pow(2, 3 - column);
       }
-      if (i%4 == 0 && bgColor == "black"){ // first item in group of 4
-        if (bitFlag){
-          tmp = tmp | 0x08;
-        }
-        else {
-          tmp = tmp | 0x80;
-        }
-      }
-
-      if (i%4 == 1 && bgColor == "black"){
-        if (bitFlag){
-          tmp = tmp | 0x04;
-        }
-        else {
-          tmp = tmp | 0x40;
-        }
-      }
-
-      if (i%4 == 2 && bgColor == "black"){
-        if (bitFlag){
-          tmp = tmp | 0x02;
-        }
-        else {
-          tmp = tmp | 0x20;
-        }
+      // then bottom number
+      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 96) + column + 48].style.backgroundColor;
+      if (bgColor == "black"){
+        bottom += Math.pow(2, 3 - column);
       }
     }
+    hexString += convertIntToChar(bottom);
+    hexString += convertIntToChar(top);
+  }
+  console.log(hexString);
+  console.log(hexString.length);
+  return hexString;
 }
 
-// function hex2a(hexx) {
-//     var hex = hexx.toString();//force conversion
-//     var str = '';
-//     for (var i = 0; i < hex.length; i += 2)
-//         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-//     return str;
-// }
-
+function convertIntToChar(x){
+  switch (x){
+    case 0:
+      return "0";
+    case 1:
+      return "1";
+    case 2:
+      return "2";
+    case 3:
+      return "3";
+    case 4:
+      return "4";
+    case 5:
+      return "5";
+    case 6:
+      return "6";
+    case 7:
+      return "7";
+    case 8:
+      return "8";
+    case 9:
+      return "9";
+    case 10:
+      return "A";
+    case 11:
+      return "B";
+    case 12:
+      return "C";
+    case 13:
+      return "D";
+    case 14:
+      return "E";
+    case 15:
+      return "F";
+  }
+}
 
 (function () {
 var textFile = null,
   makeTextFile = function() {
-    var string = "";
+    // var string = "";
+    //
+    // for (var i = 0; i < strings.length; i++){
+    //   // console.log(strings[i].toString(16));
+    //   // string += hex2a(strings[i]);
+    //   // console.log(hex2a(strings[i]));
+    //   // console.log(String.fromCharCode(strings[i]));
+    //   string += String.fromCharCode(strings[i]);
+    //   // console.log("ˇ");
+    // }
 
-    for (var i = 0; i < strings.length; i++){
-      // console.log(strings[i].toString(16));
-      // string += hex2a(strings[i]);
-      // console.log(hex2a(strings[i]));
-      // console.log(String.fromCharCode(strings[i]));
-      string += String.fromCharCode(strings[i]);
-      // console.log("ˇ");
+    var hexdata = convertToHex();
+
+    var byteArray = new Uint8Array(hexdata.length/2);
+    for (var x = 0; x < byteArray.length; x++){
+      byteArray[x] = parseInt(hexdata.substr(x*2,2), 16);
     }
 
-    var data = new Blob([string], {encoding: "ANSI", type: "text/plain;charset=ANSI"});
-    console.log(data);
+    var data = new Blob([byteArray], {type: "application/octet-stream"});
 
     // If we are replacing a previously generated file we need to
     // manually revoke the object URL to avoid memory leaks.
