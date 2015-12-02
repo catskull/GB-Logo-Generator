@@ -47,31 +47,56 @@ function invert() {
 function convertToHex(){
   var list = document.getElementsByTagName("TD");
   var hexString = "";
-  var top = 0;
-  var bottom = 0;
-  for (var block = 0; block < 48; block ++){
-    top = 0;
-    bottom = 0;
+  var toptop = 0;
+  var topbottom = 0;
+  var bottomtop = 0;
+  var bottombottom = 0;
+  // there are 48 blocks total
+  for (var block = 0; block < 24; block ++){
+    toptop = 0;
+    topbottom = 0;
+    bottomtop = 0;
+    bottombottom = 0;
+    // each block has 4 columns
     for (var column = 0; column < 4; column ++){
-      // first add top number
-      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 96) + column].style.backgroundColor;
+      // block % 12 gives us which column of blocks we are in
+      // Math.floor(block / 12) gives us which row of blocks we are in
+      // if we are in the column n + 1 then we want to start 4 cells passed column n
+      // if we are in row n + 1 then we want to start 96 cells passed row n
+      // first add top number of top block
+      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column].style.backgroundColor;
       if (bgColor == "black"){
-        top += Math.pow(2, 3 - column);
+        // Math.pow(2, 3 - column) will give us 2^3 for the first column, and so on
+        toptop += Math.pow(2, 3 - column);
       }
-      // then bottom number
-      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 96) + column + 48].style.backgroundColor;
+      // then bottom number of top block
+      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column + 48].style.backgroundColor;
       if (bgColor == "black"){
-        bottom += Math.pow(2, 3 - column);
+        topbottom += Math.pow(2, 3 - column);
+      }
+      // then top number of bottom block
+      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column + 96].style.backgroundColor;
+      if (bgColor == "black"){
+        bottomtop += Math.pow(2, 3 - column);
+      }
+      // then bottom number of bottom block
+      bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column + 144].style.backgroundColor;
+      if (bgColor == "black"){
+        bottombottom += Math.pow(2, 3 - column);
       }
     }
-    hexString += convertIntToChar(bottom);
-    hexString += convertIntToChar(top);
+    // the bottom is added to the string first, then the top
+    hexString += convertIntToChar(toptop);
+    hexString += convertIntToChar(topbottom);
+    hexString += convertIntToChar(bottomtop);
+    hexString += convertIntToChar(bottombottom);
   }
   console.log(hexString);
   console.log(hexString.length);
   return hexString;
 }
 
+// really basic function. May be kind of crappy.
 function convertIntToChar(x){
   switch (x){
     case 0:
@@ -112,16 +137,6 @@ function convertIntToChar(x){
 (function () {
 var textFile = null,
   makeTextFile = function() {
-    // var string = "";
-    //
-    // for (var i = 0; i < strings.length; i++){
-    //   // console.log(strings[i].toString(16));
-    //   // string += hex2a(strings[i]);
-    //   // console.log(hex2a(strings[i]));
-    //   // console.log(String.fromCharCode(strings[i]));
-    //   string += String.fromCharCode(strings[i]);
-    //   // console.log("ˇ");
-    // }
 
     var hexdata = convertToHex();
 
