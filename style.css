@@ -8,11 +8,3 @@ table, th, td {
     border: 1px solid black;
     cursor: default;
 }
-
-.container {
-
-}
-
-td:hover {
-  background-color: black;
-}
