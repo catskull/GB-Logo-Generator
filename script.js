@@ -1,47 +1,68 @@
-var mouseDown = 0;
-var blackFlag = 0;
-var tmp = 0x00;
-var bitFlag = 0;
-var total = [];
-var strings = [];
-var position = 0;
-var bgColor;
+var mouseDown = false;
+var blackFlag = false;
+var lastElement = null;
+//var tmp = 0x00;
+//var bitFlag = 0;
+//var total = [];
+//var strings = [];
+//var position = 0;
+//var bgColor;
 
 document.onmousedown = function() {
-  ++mouseDown;
+  mouseDown = true;
 };
 
 document.onmouseup = function() {
-  --mouseDown;
+  mouseDown = false;
 };
 
-function drag(element){
+function mouseOutHandler(element){
+  if (!mouseDown){
+    fill(element);
+  }
+}
+
+function mouseOverHandler(element){
   if (mouseDown){
-    if (!blackFlag){
+    if (blackFlag){
+      element.style.backgroundColor = "black";
+    } else {
       element.style.backgroundColor = "white";
     }
-    else {
-      element.style.backgroundColor = "black";
-    }
+  } else {
+    fill(element);
+  }
+}
+
+function mouseDownHandler(element){
+  drag(element);
+}
+
+function mouseUpHandler(element){
+  fill(element);
+}
+
+function drag(element){
+  if (element.style.backgroundColor == "black"){
+    blackFlag = true;
+  } else {
+    blackFlag = false;
   }
 }
 
 function fill(element){
-    if (element.style.backgroundColor == "black"){
-      element.style.backgroundColor = "white";
-      blackFlag = 0;
-    }
-    else {
-      element.style.backgroundColor = "black";
-      blackFlag = 1;
-    }
+  if (element.style.backgroundColor == "black"){
+    element.style.backgroundColor = "white";
+  } else {
+    element.style.backgroundColor = "black";
+  }
 }
 
 function invert() {
-    var list = document.getElementsByTagName("TD");
-    for (var i = 0; i < list.length; i++){
-      fill(list[i]);
-    }
+  var list = document.getElementsByTagName("TD");
+  for (var i = 0; i < list.length; i++){
+    fill(list[i]);
+  }
 }
 
 function convertToHex(){
@@ -134,37 +155,23 @@ function convertIntToChar(x){
   }
 }
 
-(function () {
-var textFile = null,
-  makeTextFile = function() {
+function downloadFile(){
+  var hexdata = convertToHex();
 
-    var hexdata = convertToHex();
+  var byteArray = new Uint8Array(hexdata.length/2);
+  for (var x = 0; x < byteArray.length; x++){
+    byteArray[x] = parseInt(hexdata.substr(x*2,2), 16);
+  }
 
-    var byteArray = new Uint8Array(hexdata.length/2);
-    for (var x = 0; x < byteArray.length; x++){
-      byteArray[x] = parseInt(hexdata.substr(x*2,2), 16);
-    }
+  var data = new Blob([byteArray], {type: "application/octet-stream"});
 
-    var data = new Blob([byteArray], {type: "application/octet-stream"});
+  textFile = window.URL.createObjectURL(data);
 
-    // If we are replacing a previously generated file we need to
-    // manually revoke the object URL to avoid memory leaks.
-    if (textFile !== null) {
-      window.URL.revokeObjectURL(textFile);
-    }
-
-    textFile = window.URL.createObjectURL(data);
-
-    return textFile;
-  };
-
-
-  var create = document.getElementById('download'),
-    textbox = document.getElementById('textbox');
-
-  create.addEventListener('click', function () {
-    var link = document.getElementById('downloadlink');
-    link.href = makeTextFile();
-    link.style.display = 'block';
-  }, false);
-})();
+  // create the download link, then download it, then destroy it
+  var a = document.createElement("a");
+  a.style = "display: none";
+  a.href = textFile;
+  a.download = "logo.gb";
+  a.click();
+  window.URL.revokeObjectURL(textFile);
+}
