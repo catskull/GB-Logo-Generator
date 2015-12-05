@@ -156,6 +156,8 @@ function convertIntToChar(x){
 }
 
 function downloadFile(){
+  // test on super mario land rom
+  console.log(calculateChecksum("5355504552204D4152494F4C414E4400000000010100000100"));
   var hexdata = convertToHex();
 
   var byteArray = new Uint8Array(hexdata.length/2);
@@ -174,4 +176,117 @@ function downloadFile(){
   a.download = "logo.gb";
   a.click();
   window.URL.revokeObjectURL(textFile);
+}
+
+// precondition: string is the hex representation of bytes of data
+// with NO spaces
+function calculateChecksum(string){
+  var totalChecksum = "";
+  var firstChecksum = 0;
+  var secondChecksum = 0;
+  var first = 0;
+  var second = 0;
+  var carry = 0;
+  for (x = 0; x < string.length; x += 2){
+    // reset carry bit
+    carry = 0;
+    // get the hex values for a byte
+    var first = convertCharToInt(string[x]);
+    var second = convertCharToInt(string[x + 1]);
+    // invert them
+    first = invert(first);
+    second = invert(second);
+    // sum the least significant 4 bits
+    secondChecksum += second;
+    // if this result is greater than 15, then we have a carry bit
+    if (secondChecksum > 15){
+      secondChecksum -= 16;
+      carry = 1;
+    }
+    firstChecksum += first + carry;
+    // if this result is greater than 15, then we have a carry bit
+    // but we don't care about it
+    if (firstChecksum > 15){
+      firstChecksum -= 16;
+    }
+  }
+  // at the very end, convert the checksum ints to chars and put them
+  // together. NOTE: checksum should always be a single byte
+  totalChecksum += convertIntToChar(firstChecksum);
+  totalChecksum += convertIntToChar(secondChecksum);
+  return totalChecksum;
+}
+
+function convertCharToInt(x){
+  switch (x){
+    case "0":
+      return 0;
+    case "1":
+      return 1;
+    case "2":
+      return 2;
+    case "3":
+      return 3;
+    case "4":
+      return 4;
+    case "5":
+      return 5;
+    case "6":
+      return 6;
+    case "7":
+      return 7;
+    case "8":
+      return 8;
+    case "9":
+      return 9;
+    case "A":
+      return 10;
+    case "B":
+      return 11;
+    case "C":
+      return 12;
+    case "D":
+      return 13;
+    case "E":
+      return 14;
+    case "F":
+      return 15;
+  }
+}
+
+function invert(x){
+  switch (x){
+    case 0:
+      return 15;
+    case 1:
+      return 14;
+    case 2:
+      return 13;
+    case 3:
+      return 12;
+    case 4:
+      return 11;
+    case 5:
+      return 10;
+    case 6:
+      return 9;
+    case 7:
+      return 8;
+    case 8:
+      return 7;
+    case 9:
+      return 6;
+    case 10:
+      return 5;
+    case 11:
+      return 4;
+    case 12:
+      return 3;
+    case 13:
+      return 2;
+    case 14:
+      return 1;
+    case 15:
+      return 0;
+  }
 }
