@@ -58,7 +58,7 @@ function fill(element){
   }
 }
 
-function invert() {
+function invertLogo() {
   var list = document.getElementsByTagName("TD");
   for (var i = 0; i < list.length; i++){
     fill(list[i]);
