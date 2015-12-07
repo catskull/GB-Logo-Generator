@@ -158,6 +158,7 @@ function convertIntToChar(x){
 function downloadFile(){
   // test on super mario land rom
   console.log(calculateChecksum("5355504552204D4152494F4C414E4400000000010100000100"));
+
   var hexdata = convertToHex();
 
   var byteArray = new Uint8Array(hexdata.length/2);
@@ -288,5 +289,175 @@ function invert(x){
       return 1;
     case 15:
       return 0;
+  }
+}
+
+function calculateGlobalChecksum(string){
+  var totalChecksum = "";
+  var firstChecksum = 0;
+  var secondChecksum = 0;
+  var thirdChecksum = 0;
+  var fourthChecksum = 0;
+  var first = 0;
+  var second = 0;
+  var carry = 0;
+
+  for (x = 0; x < string.length; x += 3){
+    if (x != 1002 && x != 1005){
+      first = convertCharToInt(string[x+1]);
+      second = convertCharToInt(string[x]);
+      firstChecksum += first;
+      if (firstChecksum > 15){
+        firstChecksum -= 16;
+        carry = 1;
+      } else {
+        carry = 0;
+      }
+      secondChecksum += second + carry;
+      if (secondChecksum > 15){
+        secondChecksum -= 16;
+        carry = 1;
+      } else {
+        carry = 0;
+      }
+      thirdChecksum += carry;
+      if (thirdChecksum > 15){
+        thirdChecksum -= 16;
+        carry = 1;
+      } else {
+        carry = 0;
+      }
+      fourthChecksum += carry;
+      if (fourthChecksum > 15){
+        fourthChecksum -= 16;
+      }
+    }
+  }
+  totalChecksum += convertIntToChar(fourthChecksum);
+  totalChecksum += convertIntToChar(thirdChecksum);
+  totalChecksum += convertIntToChar(secondChecksum);
+  totalChecksum += convertIntToChar(firstChecksum);
+  return totalChecksum;
+}
+
+function loadLogo(){
+  var row = new Array(4);
+  var list = document.getElementsByTagName("TD");
+  var formattedHexData = "";
+  var hexData = prompt("Please enter the hex data. Whitespace is ignored.", "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+  // first make sure hexData is the properlength and eliminate whitespace in the string
+  for (x = 0; x < hexData.length; x++){
+    if (isValidHexValue(hexData[x])){
+      formattedHexData += hexData[x];
+    }
+  }
+  if (formattedHexData.length == 96){
+    clearTable();
+    // first do top half of logo
+    for (x = 0; x < 48; x += 4){
+      // convert 2 bytes of data
+      row[0] = convertCharToInt(formattedHexData[x]);
+      row[1] = convertCharToInt(formattedHexData[x+1]);
+      row[2] = convertCharToInt(formattedHexData[x+2]);
+      row[3] = convertCharToInt(formattedHexData[x+3]);
+      for (y = 0; y < 4; y++){
+        // set first bit
+        if (Math.floor(row[y] / 8) == 1){
+          list[x + (y*48)].style.backgroundColor = "black";
+          row[y] -= 8;
+        }
+        // then second bit
+        if (Math.floor(row[y] / 4) == 1){
+          list[(x+1) + (y*48)].style.backgroundColor = "black";
+          row[y] -= 4;
+        }
+        // then third bit
+        if (Math.floor(row[y] / 2) == 1){
+          list[(x+2) + (y*48)].style.backgroundColor = "black";
+          row[y] -= 2;
+        }
+        // then fourth bit
+        if (Math.floor(row[y] / 1) == 1){
+          list[(x+3) + (y*48)].style.backgroundColor = "black";
+        }
+      }
+    }
+    // then do bottom half
+    for (x = 48; x < 96; x += 4){
+      // convert 2 bytes of data
+      row[0] = convertCharToInt(formattedHexData[x]);
+      row[1] = convertCharToInt(formattedHexData[x+1]);
+      row[2] = convertCharToInt(formattedHexData[x+2]);
+      row[3] = convertCharToInt(formattedHexData[x+3]);
+      for (y = 0; y < 4; y++){
+        // set first bit
+        if (Math.floor(row[y] / 8) == 1){
+          list[144 + x + (y*48)].style.backgroundColor = "black";
+          row[y] -= 8;
+        }
+        // then second bit
+        if (Math.floor(row[y] / 4) == 1){
+          list[145 + x + (y*48)].style.backgroundColor = "black";
+          row[y] -= 4;
+        }
+        // then third bit
+        if (Math.floor(row[y] / 2) == 1){
+          list[146 + x + (y*48)].style.backgroundColor = "black";
+          row[y] -= 2;
+        }
+        // then fourth bit
+        if (Math.floor(row[y] / 1) == 1){
+          list[147 + x + (y*48)].style.backgroundColor = "black";
+        }
+      }
+    }
+  } else {
+    alert("The hex data received was not the correct length!");
+  }
+}
+
+function isValidHexValue(x){
+  switch (x){
+    case "0":
+      return true;
+    case "1":
+      return true;
+    case "2":
+      return true;
+    case "3":
+      return true;
+    case "4":
+      return true;
+    case "5":
+      return true;
+    case "6":
+      return true;
+    case "7":
+      return true;
+    case "8":
+      return true;
+    case "9":
+      return true;
+    case "A":
+      return true;
+    case "B":
+      return true;
+    case "C":
+      return true;
+    case "D":
+      return true;
+    case "E":
+      return true;
+    case "F":
+      return true;
+    default:
+      return false;
+  }
+}
+
+function clearTable(){
+  var list = document.getElementsByTagName("TD");
+  for (x = 0; x < list.length; x++){
+    list[x].style.backgroundColor = "white";
   }
 }
