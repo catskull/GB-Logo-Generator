@@ -16,12 +16,6 @@ document.onmouseup = function() {
   mouseDown = false;
 };
 
-function mouseOutHandler(element){
-  if (!mouseDown){
-    fill(element);
-  }
-}
-
 function mouseOverHandler(element){
   if (mouseDown){
     if (blackFlag){
@@ -29,20 +23,15 @@ function mouseOverHandler(element){
     } else {
       element.style.backgroundColor = "white";
     }
-  } else {
-    fill(element);
   }
 }
 
 function mouseDownHandler(element){
-  drag(element);
-}
-
-function mouseUpHandler(element){
   fill(element);
+  setBlackFlag(element);
 }
 
-function drag(element){
+function setBlackFlag(element){
   if (element.style.backgroundColor == "black"){
     blackFlag = true;
   } else {
