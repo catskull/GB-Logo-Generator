@@ -112,8 +112,6 @@ function convertToHex(){
     hexString += convertIntToChar(bottomtop);
     hexString += convertIntToChar(bottombottom);
   }
-  console.log(hexString);
-  console.log(hexString.length);
   return hexString;
 }
 
@@ -156,9 +154,6 @@ function convertIntToChar(x){
 }
 
 function downloadFile(){
-  // test on super mario land rom
-  console.log(calculateChecksum("5355504552204D4152494F4C414E4400000000010100000100"));
-
   var hexdata = convertToHex();
 
   var byteArray = new Uint8Array(hexdata.length/2);
