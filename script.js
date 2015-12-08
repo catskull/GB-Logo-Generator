@@ -112,8 +112,6 @@ function convertToHex(){
     hexString += convertIntToChar(bottomtop);
     hexString += convertIntToChar(bottombottom);
   }
-  console.log(hexString);
-  console.log(hexString.length);
   return hexString;
 }
 
@@ -156,10 +154,13 @@ function convertIntToChar(x){
 }
 
 function downloadFile(){
-  // test on super mario land rom
-  console.log(calculateChecksum("5355504552204D4152494F4C414E4400000000010100000100"));
-
-  var hexdata = convertToHex();
+  var hexdata = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001";
+  hexdata += convertToHex();
+  hexdata += "4C4F474F20524F4D00000000000000004353000000000101001033BB";
+  // fill up the rest of the 32kb rom with 0xFF
+  for (var i =0; i < 32432; i++){
+    hexdata += "FF";
+  }
 
   var byteArray = new Uint8Array(hexdata.length/2);
   for (var x = 0; x < byteArray.length; x++){
@@ -340,11 +341,14 @@ function calculateGlobalChecksum(string){
   return totalChecksum;
 }
 
-function loadLogo(){
+function loadLogo(hexData){
   var row = new Array(4);
   var list = document.getElementsByTagName("TD");
   var formattedHexData = "";
-  var hexData = prompt("Please enter the hex data. Whitespace is ignored.", "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+  if (!hexData){
+    hexData = prompt("Please enter the hex data. Whitespace is ignored.", "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+
+  }
   // first make sure hexData is the properlength and eliminate whitespace in the string
   for (x = 0; x < hexData.length; x++){
     if (isValidHexValue(hexData[x])){
