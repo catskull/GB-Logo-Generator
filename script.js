@@ -340,11 +340,14 @@ function calculateGlobalChecksum(string){
   return totalChecksum;
 }
 
-function loadLogo(){
+function loadLogo(hexData){
   var row = new Array(4);
   var list = document.getElementsByTagName("TD");
   var formattedHexData = "";
-  var hexData = prompt("Please enter the hex data. Whitespace is ignored.", "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+  if (!hexData){
+    hexData = prompt("Please enter the hex data. Whitespace is ignored.", "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+
+  }
   // first make sure hexData is the properlength and eliminate whitespace in the string
   for (x = 0; x < hexData.length; x++){
     if (isValidHexValue(hexData[x])){
