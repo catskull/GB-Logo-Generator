@@ -162,11 +162,19 @@ function downloadFile(){
 
   // create the download link, then download it, then destroy it
   var a = document.createElement("a");
+  var clickEvent = new MouseEvent("click", {
+    "view": window,
+    "bubbles": true,
+    "cancelable": false
+  });
   a.style = "display: none";
   a.href = textFile;
   a.download = "logo.gb";
-  a.click();
-  window.URL.revokeObjectURL(textFile);
+  a.dispatchEvent(clickEvent);
+  setTimeout(function(){
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(textFile);
+  }, 100);
 }
 
 // precondition: string is the hex representation of bytes of data
