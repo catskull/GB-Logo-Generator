@@ -250,44 +250,23 @@ function convertCharToInt(x){
       return 14;
     case "F":
       return 15;
+    case "a":
+      return 10;
+    case "b":
+      return 11;
+    case "c":
+      return 12;
+    case "d":
+      return 13;
+    case "e":
+      return 14;
+    case "f":
+      return 15;
   }
 }
 
 function invert(x){
-  switch (x){
-    case 0:
-      return 15;
-    case 1:
-      return 14;
-    case 2:
-      return 13;
-    case 3:
-      return 12;
-    case 4:
-      return 11;
-    case 5:
-      return 10;
-    case 6:
-      return 9;
-    case 7:
-      return 8;
-    case 8:
-      return 7;
-    case 9:
-      return 6;
-    case 10:
-      return 5;
-    case 11:
-      return 4;
-    case 12:
-      return 3;
-    case 13:
-      return 2;
-    case 14:
-      return 1;
-    case 15:
-      return 0;
-  }
+  return 15 - x;
 }
 
 function calculateGlobalChecksum(string){
@@ -418,42 +397,11 @@ function loadLogo(hexData){
 }
 
 function isValidHexValue(x){
-  switch (x){
-    case "0":
-      return true;
-    case "1":
-      return true;
-    case "2":
-      return true;
-    case "3":
-      return true;
-    case "4":
-      return true;
-    case "5":
-      return true;
-    case "6":
-      return true;
-    case "7":
-      return true;
-    case "8":
-      return true;
-    case "9":
-      return true;
-    case "A":
-      return true;
-    case "B":
-      return true;
-    case "C":
-      return true;
-    case "D":
-      return true;
-    case "E":
-      return true;
-    case "F":
-      return true;
-    default:
-      return false;
+  var validValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
+  for (var i = 0; i < validValues.length; i++) {
+    if (validValues[i] == x) return true;
   }
+  return false;
 }
 
 function clearTable(){
