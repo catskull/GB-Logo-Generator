@@ -19,9 +19,9 @@ document.onmouseup = function() {
 function mouseOverHandler(element){
   if (mouseDown){
     if (blackFlag){
-      element.style.backgroundColor = "#306230";
+      element.style.backgroundColor = "black";
     } else {
-      element.style.backgroundColor = "#9CBD0F";
+      element.style.backgroundColor = "white";
     }
   }
 }
@@ -32,7 +32,7 @@ function mouseDownHandler(element){
 }
 
 function setBlackFlag(element){
-  if (element.style.backgroundColor == "rgb(48, 98, 48)"){
+  if (element.style.backgroundColor == "black"){
     blackFlag = true;
   } else {
     blackFlag = false;
@@ -40,10 +40,10 @@ function setBlackFlag(element){
 }
 
 function fill(element){
-  if (element.style.backgroundColor == "rgb(48, 98, 48)"){
-    element.style.backgroundColor = "#9CBD0F";
+  if (element.style.backgroundColor == "black"){
+    element.style.backgroundColor = "white";
   } else {
-    element.style.backgroundColor = "#306230";
+    element.style.backgroundColor = "black";
   }
 }
 
@@ -75,23 +75,23 @@ function convertToHex(){
       // if we are in row n + 1 then we want to start 96 cells passed row n
       // first add top number of top block
       bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column].style.backgroundColor;
-      if (bgColor == "#306230"){
+      if (bgColor == "black"){
         // Math.pow(2, 3 - column) will give us 2^3 for the first column, and so on
         toptop += Math.pow(2, 3 - column);
       }
       // then bottom number of top block
       bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column + 48].style.backgroundColor;
-      if (bgColor == "#306230"){
+      if (bgColor == "black"){
         topbottom += Math.pow(2, 3 - column);
       }
       // then top number of bottom block
       bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column + 96].style.backgroundColor;
-      if (bgColor == "#306230"){
+      if (bgColor == "black"){
         bottomtop += Math.pow(2, 3 - column);
       }
       // then bottom number of bottom block
       bgColor = list[((block % 12) * 4) + (Math.floor(block / 12) * 192) + column + 144].style.backgroundColor;
-      if (bgColor == "#306230"){
+      if (bgColor == "black"){
         bottombottom += Math.pow(2, 3 - column);
       }
     }
@@ -343,22 +343,22 @@ function loadLogo(hexData){
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
-          list[x + (y*48)].style.backgroundColor = "#306230";
+          list[x + (y*48)].style.backgroundColor = "black";
           row[y] -= 8;
         }
         // then second bit
         if (Math.floor(row[y] / 4) == 1){
-          list[(x+1) + (y*48)].style.backgroundColor = "#306230";
+          list[(x+1) + (y*48)].style.backgroundColor = "black";
           row[y] -= 4;
         }
         // then third bit
         if (Math.floor(row[y] / 2) == 1){
-          list[(x+2) + (y*48)].style.backgroundColor = "#306230";
+          list[(x+2) + (y*48)].style.backgroundColor = "black";
           row[y] -= 2;
         }
         // then fourth bit
         if (Math.floor(row[y] / 1) == 1){
-          list[(x+3) + (y*48)].style.backgroundColor = "#306230";
+          list[(x+3) + (y*48)].style.backgroundColor = "black";
         }
       }
     }
@@ -372,22 +372,22 @@ function loadLogo(hexData){
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
-          list[144 + x + (y*48)].style.backgroundColor = "#306230";
+          list[144 + x + (y*48)].style.backgroundColor = "black";
           row[y] -= 8;
         }
         // then second bit
         if (Math.floor(row[y] / 4) == 1){
-          list[145 + x + (y*48)].style.backgroundColor = "#306230";
+          list[145 + x + (y*48)].style.backgroundColor = "black";
           row[y] -= 4;
         }
         // then third bit
         if (Math.floor(row[y] / 2) == 1){
-          list[146 + x + (y*48)].style.backgroundColor = "#306230";
+          list[146 + x + (y*48)].style.backgroundColor = "black";
           row[y] -= 2;
         }
         // then fourth bit
         if (Math.floor(row[y] / 1) == 1){
-          list[147 + x + (y*48)].style.backgroundColor = "#306230";
+          list[147 + x + (y*48)].style.backgroundColor = "black";
         }
       }
     }
@@ -407,6 +407,6 @@ function isValidHexValue(x){
 function clearTable(){
   var list = document.getElementsByTagName("TD");
   for (x = 0; x < list.length; x++){
-    list[x].style.backgroundColor = "#9CBD0F";
+    list[x].style.backgroundColor = "white";
   }
 }
