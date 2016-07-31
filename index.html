@@ -426,7 +426,7 @@
       <form>
   <div class="form-group">
     <label for="titleInput">Title</label>
-    <input type="text" class="form-control" id="titleInput" placeholder="Max 16 ASCII characters" maxlength="16">
+    <input type="text" class="form-control" id="titleInput" placeholder="11 ASCII characters" maxlength="11">
   </div>
   <div class="form-group">
     <label for="manufacturerInput">Manufacturer Code</label>
@@ -446,15 +446,75 @@
       <input type="checkbox"> SGB?
     </label>
   </div>
-  <div class="dropdown">
-  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown trigger
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    ...
-  </ul>
-</div>
+  <select>
+    <option value="" disabled selected>Select cartridge type</option>
+    <option>ROM ONLY</option>
+    <option>MBC1</option>
+    <option>MBC1+RAM</option>
+    <option>MBC1+RAM+BATTERY</option>
+    <option>MBC2</option>
+    <option>MBC2+BATTERY</option>
+    <option>ROM+RAM</option>
+    <option>ROM+RAM+BATTERY</option>
+    <option>MMM01</option>
+    <option>MMM01+RAM</option>
+    <option>MMM01+RAM+BATTERY</option>
+    <option>MBC3+TIMER+BATTERY</option>
+    <option>MBC3+TIMER+RAM+BATTERY</option>
+    <option>MBC3</option>
+    <option>MBC3+RAM</option>
+    <option>MBC3+RAM+BATTERY</option>
+    <option>MBC4</option>
+    <option>MBC4+RAM</option>
+    <option>MBC4+RAM+BATTERY</option>
+    <option>MBC5</option>
+    <option>MBC5+RAM</option>
+    <option>MBC5+RAM+BATTERY</option>
+    <option>MBC5+RUMBLE</option>
+    <option>MBC5+RUMBLE+RAM</option>
+    <option>MBC5+RUMBLE+RAM+BATTERY</option>
+    <option>MBC6</option>
+    <option>MBC7+SENSOR+RUMBLE+RAM+BATTERY</option>
+    <option>POCKET CAMERA</option>
+    <option>BANDAI TAMA5</option>
+    <option>HuC3</option>
+    <option>HuC1+RAM+BATTERY</option>
+  </select>
+  <select>
+    <option value="" disabled selected>Select ROM size</option>
+    <option>32KByte (no ROM banking)</option>
+    <option>64KByte (4 banks)</option>
+    <option>128KByte (8 banks)</option>
+    <option>256KByte (16 banks)</option>
+    <option>512KByte (32 banks)</option>
+    <option>1MByte (64 banks)</option>
+    <option>2MByte (128 banks)</option>
+    <option>4MByte (256 banks)</option>
+    <option>1.1MByte (72 banks)</option>
+    <option>1.2MByte (80 banks)</option>
+    <option>1.5MByte (96 banks)</option>
+  </select>
+  <select>
+    <option value="" disabled selected>Select RAM size</option>
+    <option>2KBytes</option>
+    <option>8KBytes</option>
+    <option>32KBytes</option>
+    <option>128KBytes</option>
+    <option>64KBytes</option>
+  </select>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Japanese?
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="licenseeCodeInput">Old Licensee Code</label>
+    <input type="text" class="form-control" id="licenseeCodeInput" placeholder="2 hex symbols" maxlength="2">
+  </div>
+  <div class="form-group">
+    <label for="versionNumberInput">Mask ROM Version Number</label>
+    <input type="text" class="form-control" id="versionNumberInput" placeholder="2 hex symbols" maxlength="2">
+  </div>
 </form>
     <div align="center" style="padding: 20px;">
       <button type="button" class="btn btn-secondary" onclick="invertLogo();">Invert</button>
