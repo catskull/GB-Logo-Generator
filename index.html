@@ -423,6 +423,40 @@
       </tbody>
     </table>
     <div align="center" style="padding: 20px;">
+      <form>
+  <div class="form-group">
+    <label for="titleInput">Title</label>
+    <input type="text" class="form-control" id="titleInput" placeholder="Max 16 ASCII characters" maxlength="16">
+  </div>
+  <div class="form-group">
+    <label for="manufacturerInput">Manufacturer Code</label>
+    <input type="text" class="form-control" id="manufacturerInput" placeholder="4 character manufacturer code" maxlength="4">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Gameboy Color?
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="manufacturerInput">New Licensee Code</label>
+    <input type="text" class="form-control" id="manufacturerInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> SGB?
+    </label>
+  </div>
+  <div class="dropdown">
+  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown trigger
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dLabel">
+    ...
+  </ul>
+</div>
+</form>
+    <div align="center" style="padding: 20px;">
       <button type="button" class="btn btn-secondary" onclick="invertLogo();">Invert</button>
       <button type="button" class="btn btn-secondary" onclick="clearTable();">Clear</button>
       <!-- <button type="button" class="btn btn-secondary" onClick="loadLogo();">Load</button> -->
@@ -434,7 +468,7 @@
 
   <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

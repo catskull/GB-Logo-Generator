@@ -180,15 +180,16 @@ optgroup {
   font-weight: bold;
 }
 table {
-  border-spacing: 0;
-  border-collapse: collapse;
+  /*border-spacing: 0;*/
+  /*border-collapse: collapse;*/
   text-align: center;
   height: 180px;
   width: 1090px;
 }
 td, th {
-  border: 1px solid #306230;
-  padding: 0;
+  border: 1px solid black;
+  cursor: default;
+  /*padding: 0;*/
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
