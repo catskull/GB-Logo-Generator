@@ -332,7 +332,7 @@ function loadLogo(hexData){
     }
   }
   if (formattedHexData.length == 96){
-    clearTable();
+    clearEverything();
     // first do top half of logo
     for (x = 0; x < 48; x += 4){
       // convert 2 bytes of data
@@ -408,11 +408,22 @@ function isValidHexValue(x){
   return false;
 }
 
-function clearTable(){
+function clearEverything(){
   var list = document.getElementsByTagName("TD");
   for (x = 0; x < list.length; x++){
     list[x].style.backgroundColor = "white";
   }
+  document.getElementById('titleInput').value = "";
+  document.getElementById('manufacturerInput').value = "";
+  document.getElementById('cgbSupportSelect').value = "";
+  document.getElementById('newLicenceeInput').value = "";
+  document.getElementById('sgbCheckbox').checked = false;
+  document.getElementById('cartridgeTypeSelect').value = "";
+  document.getElementById('romSizeSelect').value = "";
+  document.getElementById('ramSizeSelect').value = "";
+  document.getElementById('destinationCheckbox').checked = false;
+  document.getElementById('oldLicenseeInput').value = "";
+  document.getElementById('versionNumberInput').value = "";
 }
 
 function checkValidLogo(){
