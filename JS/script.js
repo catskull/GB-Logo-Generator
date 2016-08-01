@@ -532,7 +532,7 @@ function parseUploadedHexString(hexString){
   setRomSize(romSize);
   setRamSize(ramSize);
   setDestinationCode(destinationCode);
-  document.getElementById('oldLicenseeInput').value = oldLicenceeCode.getASCIIFromHex();
+  document.getElementById('oldLicenseeInput').value = oldLicenceeCode;
   document.getElementById('versionNumberInput').value = romVersionNumber;
   if (oldLicenceeCode === "33"){
     console.log("HERE");
