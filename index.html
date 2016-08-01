@@ -432,89 +432,90 @@
     <label for="manufacturerInput">Manufacturer Code</label>
     <input type="text" class="form-control" id="manufacturerInput" placeholder="4 character manufacturer code" maxlength="4">
   </div>
-  <select>
+  <select id="cgbSupportSelect">
     <option value="" disabled selected>Select CGB Support</option>
-    <option>No CGB Support</option>
-    <option>CGB Support</option>
-    <option>CGB Only</option>
+    <option value=0>No CGB Support</option>
+    <option value=1>CGB Support</option>
+    <option value=2>CGB Only</option>
   </select>
   <div class="form-group">
-    <label for="manufacturerInput">New Licensee Code</label>
-    <input type="text" class="form-control" id="manufacturerInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
+    <label for="newLicenceeInput">New Licensee Code</label>
+    <input type="text" class="form-control" id="newLicenceeInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
   </div>
   <div class="checkbox">
     <label>
-      <input type="checkbox"> SGB?
+      <input type="checkbox" id="sgbCheckbox"> SGB?
     </label>
   </div>
-  <select>
+  <select id="cartridgeTypeSelect">
     <option value="" disabled selected>Select cartridge type</option>
-    <option>ROM ONLY</option>
-    <option>MBC1</option>
-    <option>MBC1+RAM</option>
-    <option>MBC1+RAM+BATTERY</option>
-    <option>MBC2</option>
-    <option>MBC2+BATTERY</option>
-    <option>ROM+RAM</option>
-    <option>ROM+RAM+BATTERY</option>
-    <option>MMM01</option>
-    <option>MMM01+RAM</option>
-    <option>MMM01+RAM+BATTERY</option>
-    <option>MBC3+TIMER+BATTERY</option>
-    <option>MBC3+TIMER+RAM+BATTERY</option>
-    <option>MBC3</option>
-    <option>MBC3+RAM</option>
-    <option>MBC3+RAM+BATTERY</option>
-    <option>MBC4</option>
-    <option>MBC4+RAM</option>
-    <option>MBC4+RAM+BATTERY</option>
-    <option>MBC5</option>
-    <option>MBC5+RAM</option>
-    <option>MBC5+RAM+BATTERY</option>
-    <option>MBC5+RUMBLE</option>
-    <option>MBC5+RUMBLE+RAM</option>
-    <option>MBC5+RUMBLE+RAM+BATTERY</option>
-    <option>MBC6</option>
-    <option>MBC7+SENSOR+RUMBLE+RAM+BATTERY</option>
-    <option>POCKET CAMERA</option>
-    <option>BANDAI TAMA5</option>
-    <option>HuC3</option>
-    <option>HuC1+RAM+BATTERY</option>
+    <option value=0>ROM ONLY</option>
+    <option value=1>MBC1</option>
+    <option value=2>MBC1+RAM</option>
+    <option value=3>MBC1+RAM+BATTERY</option>
+    <option value=4>MBC2</option>
+    <option value=5>MBC2+BATTERY</option>
+    <option value=6>ROM+RAM</option>
+    <option value=7>ROM+RAM+BATTERY</option>
+    <option value=8>MMM01</option>
+    <option value=9>MMM01+RAM</option>
+    <option value=10>MMM01+RAM+BATTERY</option>
+    <option value=11>MBC3+TIMER+BATTERY</option>
+    <option value=12>MBC3+TIMER+RAM+BATTERY</option>
+    <option value=13>MBC3</option>
+    <option value=14>MBC3+RAM</option>
+    <option value=15>MBC3+RAM+BATTERY</option>
+    <option value=16>MBC4</option>
+    <option value=17>MBC4+RAM</option>
+    <option value=18>MBC4+RAM+BATTERY</option>
+    <option value=19>MBC5</option>
+    <option value=20>MBC5+RAM</option>
+    <option value=21>MBC5+RAM+BATTERY</option>
+    <option value=22>MBC5+RUMBLE</option>
+    <option value=23>MBC5+RUMBLE+RAM</option>
+    <option value=24>MBC5+RUMBLE+RAM+BATTERY</option>
+    <option value=25>MBC6</option>
+    <option value=26>MBC7+SENSOR+RUMBLE+RAM+BATTERY</option>
+    <option value=27>POCKET CAMERA</option>
+    <option value=28>BANDAI TAMA5</option>
+    <option value=29>HuC3</option>
+    <option value=30>HuC1+RAM+BATTERY</option>
   </select>
-  <select>
+  <select id="romSizeSelect">
     <option value="" disabled selected>Select ROM size</option>
-    <option>32KByte (no ROM banking)</option>
-    <option>64KByte (4 banks)</option>
-    <option>128KByte (8 banks)</option>
-    <option>256KByte (16 banks)</option>
-    <option>512KByte (32 banks)</option>
-    <option>1MByte (64 banks)</option>
-    <option>2MByte (128 banks)</option>
-    <option>4MByte (256 banks)</option>
-    <option>1.1MByte (72 banks)</option>
-    <option>1.2MByte (80 banks)</option>
-    <option>1.5MByte (96 banks)</option>
+    <option value=0>32KByte (no ROM banking)</option>
+    <option value=1>64KByte (4 banks)</option>
+    <option value=2>128KByte (8 banks)</option>
+    <option value=3>256KByte (16 banks)</option>
+    <option value=4>512KByte (32 banks)</option>
+    <option value=5>1MByte (64 banks)</option>
+    <option value=6>2MByte (128 banks)</option>
+    <option value=7>4MByte (256 banks)</option>
+    <option value=8>1.1MByte (72 banks)</option>
+    <option value=9>1.2MByte (80 banks)</option>
+    <option value=10>1.5MByte (96 banks)</option>
   </select>
-  <select>
+  <select id="ramSizeSelect">
     <option value="" disabled selected>Select RAM size</option>
-    <option>2KBytes</option>
-    <option>8KBytes</option>
-    <option>32KBytes</option>
-    <option>128KBytes</option>
-    <option>64KBytes</option>
+    <option value=0>None</option>
+    <option value=1>2KBytes</option>
+    <option value=2>8KBytes</option>
+    <option value=3>32KBytes</option>
+    <option value=4>128KBytes</option>
+    <option value=5>64KBytes</option>
   </select>
   <div class="checkbox">
     <label>
-      <input type="checkbox"> Japanese?
+      <input type="checkbox" id="destinationCheckbox"> Japanese?
     </label>
   </div>
   <div class="form-group">
-    <label for="licenseeCodeInput">Old Licensee Code</label>
-    <input type="text" class="form-control" id="licenseeCodeInput" placeholder="2 hex symbols" maxlength="2">
+    <label for="oldLicenseeInput">Old Licensee Code</label>
+    <input type="text" class="form-control" id="oldLicenseeInput" placeholder="2 hex symbols" maxlength="2">
   </div>
   <div class="form-group">
     <label for="versionNumberInput">Mask ROM Version Number</label>
-    <input type="text" class="form-control" id="versionNumberInput" placeholder="2 hex symbols" maxlength="2">
+    <input type="number" class="form-control" id="versionNumberInput" placeholder="2 hex symbols" min="0" max="255">
   </div>
 </form>
     <div align="center" style="padding: 20px;">
