@@ -172,7 +172,7 @@ function downloadFile(){
   a.download = "logo.gb";
   a.dispatchEvent(clickEvent);
   setTimeout(function(){
-    document.body.removeChild(a);
+    // document.body.removeChild(a);
     window.URL.revokeObjectURL(textFile);
   }, 100);
 }
@@ -396,6 +396,10 @@ function loadLogo(hexData){
   }
 }
 
+function resetLogo(){
+  loadLogo("CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+}
+
 function isValidHexValue(x){
   var validValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
   for (var i = 0; i < validValues.length; i++) {
@@ -409,4 +413,96 @@ function clearTable(){
   for (x = 0; x < list.length; x++){
     list[x].style.backgroundColor = "white";
   }
+}
+
+function checkValidLogo(){
+  // If the logo has changed, warn that the rom will not boot
+}
+
+function generateHeaderData(){
+  // Using all the fields, generate a header
+}
+
+function uploadROM(){
+  // Allow user to upload ROM and fill in data fields
+
+}
+
+// document.querySelector('input').addEventListener('change', function(){
+//     var reader = new FileReader();
+//     reader.onload = function(){
+//         var binaryString = this.result;
+//         document.querySelector('#result').innerHTML = binaryString;
+//         console.log(binaryString);
+//         }
+//     reader.readAsBinaryString(this.files[0]);
+//   }, false);
+
+$(function() {
+
+  // We can attach the `fileselect` event to all file inputs on the page
+  $(document).on('change', ':file', function() {
+    var input = $(this);//,
+    //     numFiles = input.get(0).files ? input.get(0).files.length : 1,
+    //     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect');
+  });
+
+// You have to use callbacks, otherwise you will try to read a result that isn't ready
+  $(document).ready(function(){
+      $(':file').on('fileselect', function(e) {
+          readFile(this.files[0], function(e) {
+              //manipulate with result...
+              // console.log("Raw binary string: " + e.target.result);
+              console.log("Converting: " + e.target.result.hexEncode());
+              // $('#output_field').text(e.target.result);
+          });
+
+      });
+  });
+
+  function readFile(file, callback){
+      var reader = new FileReader();
+      reader.onload = callback
+      reader.readAsBinaryString(file);
+  }
+
+
+  // // We can watch for our custom `fileselect` event like this
+  // $(document).ready( function() {
+  //   var reader = new FileReader();
+  //     $(':file').on('fileselect', function(event, numFiles, label) {
+  //
+  //       var f = this.files[0];
+  //       reader.readAsText(f);
+  //       console.log(reader.result);
+  //
+  //         var input = $(this).parents('.input-group').find(':text'),
+  //             log = numFiles > 1 ? numFiles + ' files selected' : label;
+  //
+  //         if( input.length ) {
+  //             input.val(log);
+  //         } else if( log ){
+  //             console.log(log);
+  //         }
+  //
+  //     });
+  // });
+
+});
+
+String.prototype.hexEncode = function(){
+    var hex, i;
+
+    var result = "";
+    var temp = "";
+    for (i=0; i<this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        temp = ("000"+hex).slice(-4);
+        temp = temp.substr(2,3);
+        temp = temp.toUpperCase();
+        result += temp;
+    }
+
+    return result
 }

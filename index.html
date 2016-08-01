@@ -520,14 +520,20 @@
       <button type="button" class="btn btn-secondary" onclick="invertLogo();">Invert</button>
       <button type="button" class="btn btn-secondary" onclick="clearTable();">Clear</button>
       <!-- <button type="button" class="btn btn-secondary" onClick="loadLogo();">Load</button> -->
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Load</button>
+      <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Load</button> -->
+      <button type="button" class="btn btn-secondary" onClick="resetLogo();">Reset Logo</button>
+      <!-- Interestingly, if you give the label a class of btn-secondary, it doesn't show up right -->
+      <label class="btn btn-primary btn-file">
+        Upload ROM <input type="file" accept=".gb" style="display: none;"> <div id="result"></div>
+      </label>
       <button type="button" class="btn btn-primary" onClick="downloadFile()">Download ROM</button>
     </div>
     <a download="logo.gb" id="downloadlink" style="display:none;">Download</a>
   </div>
 
+  <!-- Not needed currently. -->
   <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -543,10 +549,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-  <script src="JS\script.js"></script>
   <script src="JS\jquery-3.1.0.min.js"></script>
+  <script src="JS\script.js"></script>
   <script src="JS\bootstrap.js"></script>
 </body>
 </html>
