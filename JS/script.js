@@ -332,7 +332,7 @@ function loadLogo(hexData){
     }
   }
   if (formattedHexData.length == 96){
-    clearTable();
+    clearEverything();
     // first do top half of logo
     for (x = 0; x < 48; x += 4){
       // convert 2 bytes of data
@@ -408,11 +408,22 @@ function isValidHexValue(x){
   return false;
 }
 
-function clearTable(){
+function clearEverything(){
   var list = document.getElementsByTagName("TD");
   for (x = 0; x < list.length; x++){
     list[x].style.backgroundColor = "white";
   }
+  document.getElementById('titleInput').value = "";
+  document.getElementById('manufacturerInput').value = "";
+  document.getElementById('cgbSupportSelect').value = "";
+  document.getElementById('newLicenceeInput').value = "";
+  document.getElementById('sgbCheckbox').checked = false;
+  document.getElementById('cartridgeTypeSelect').value = "";
+  document.getElementById('romSizeSelect').value = "";
+  document.getElementById('ramSizeSelect').value = "";
+  document.getElementById('destinationCheckbox').checked = false;
+  document.getElementById('oldLicenseeInput').value = "";
+  document.getElementById('versionNumberInput').value = "";
 }
 
 function checkValidLogo(){
@@ -507,17 +518,251 @@ String.prototype.hexEncode = function(){
 }
 
 function parseUploadedHexString(hexString){
-  // first, trim the string to only contain header
-  header = hexString.substr(516, 158);
-  console.log("All data: " + header);
+  // first, set variables
   nonsense = hexString.substr(0, 100);
-  entryPoint = hexString.substr(516, 4);
+  entryPoint = hexString.substr(512, 8);
   nintendoLogo = hexString.substr(520, 96);
-  title = hexString.substr(616, 32);
-  console.log("ENTRY POINT: " + entryPoint);
-  console.log("LOGO DATA: " + nintendoLogo);
-  console.log("TITLE: " + title);
-  console.log("TITLE DECODED: " + title.getASCIIFromHex());
+  title = hexString.substr(616, 22);
+  manufacturerCode = hexString.substr(638, 8);
+  cgbFlag = hexString.substr(646, 2);
+  newLicenceeCode = hexString.substr(648, 4);
+  sgbFlag = hexString.substr(652, 2);
+  cartridgeType = hexString.substr(654, 2);
+  romSize = hexString.substr(656, 2);
+  ramSize = hexString.substr(658, 2);
+  destinationCode = hexString.substr(660, 2);
+  oldLicenceeCode = hexString.substr(662, 2);
+  romVersionNumber = hexString.substr(664, 2);
+  // if old lisencee code is 33h then new lisencee code is used instead
+  document.getElementById('titleInput').value = title.getASCIIFromHex();
+  document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
+  setCGBFlag(cgbFlag);
+  document.getElementById('newLicenceeInput').value = newLicenceeCode.getASCIIFromHex();
+  setSGBFlag(sgbFlag);
+  setCartridgeType(cartridgeType);
+  setRomSize(romSize);
+  setRamSize(ramSize);
+  setDestinationCode(destinationCode);
+  document.getElementById('oldLicenseeInput').value = oldLicenceeCode;
+  document.getElementById('versionNumberInput').value = romVersionNumber;
+  if (oldLicenceeCode === "33"){
+    console.log("HERE");
+  }
+}
+
+function setCGBFlag(cgbFlag){
+  console.log(cgbFlag);
+  var select = document.getElementById('cgbSupportSelect');
+  switch (cgbFlag){
+    case "80":
+      select.value = 1;
+      break;
+    case "C0":
+      select.value = 2;
+      break;
+    default:
+      select.value = 0;
+      break;
+  }
+}
+
+function setSGBFlag(sgbFlag){
+  check = document.getElementById('sgbCheckbox');
+  if (sgbFlag === "03"){
+    check.checked = true;
+  } else {
+    check.checked = false;
+  }
+}
+
+function setCartridgeType(cartridgeType){
+  var select = document.getElementById('cartridgeTypeSelect');
+  switch (cartridgeType){
+    case "00":
+      select.value = 0;
+      break;
+    case "01":
+      select.value = 1;
+      break;
+    case "02":
+      select.value = 2;
+      break;
+    case "03":
+      select.value = 3;
+      break;
+    case "05":
+      select.value = 4;
+      break;
+    case "06":
+      select.value = 5;
+      break;
+    case "08":
+      select.value = 6;
+      break;
+    case "09":
+      select.value = 7;
+      break;
+    case "0B":
+      select.value = 8;
+      break;
+    case "0C":
+      select.value = 9;
+      break;
+    case "0D":
+      select.value = 10;
+      break;
+    case "0F":
+      select.value = 11;
+      break;
+    case "10":
+      select.value = 12;
+      break;
+    case "11":
+      select.value = 13;
+      break;
+    case "12":
+      select.value = 14;
+      break;
+    case "13":
+      select.value = 15;
+      break;
+    case "15":
+      select.value = 16;
+      break;
+    case "16":
+      select.value = 17;
+      break;
+    case "17":
+      select.value = 18;
+      break;
+    case "19":
+      select.value = 19;
+      break;
+    case "1A":
+      select.value = 20;
+      break;
+    case "1B":
+      select.value = 21;
+      break;
+    case "1C":
+      select.value = 22;
+      break;
+    case "1D":
+      select.value = 23;
+      break;
+    case "1E":
+      select.value = 24;
+      break;
+    case "20":
+      select.value = 25;
+      break;
+    case "22":
+      select.value = 26;
+      break;
+    case "FC":
+      select.value = 27;
+      break;
+    case "FD":
+      select.value = 28;
+      break;
+    case "FE":
+      select.value = 29;
+      break;
+    case "FF":
+      select.value = 30;
+      break;
+    default:
+      // unknown code
+      break;
+  }
+}
+
+function setRomSize(romSize){
+  var select = document.getElementById('romSizeSelect');
+  switch (romSize){
+    case "00":
+      select.value = 0;
+      break;
+    case "01":
+      select.value = 1;
+      break;
+    case "02":
+      select.value = 2;
+      break;
+    case "03":
+      select.value = 3;
+      break;
+    case "04":
+      select.value = 4;
+      break;
+    case "05":
+      select.value = 5;
+      break;
+    case "06":
+      select.value = 6;
+      break;
+    case "07":
+      select.value = 7;
+      break;
+    case "52":
+      select.value = 8;
+      break;
+    case "53":
+      select.value = 9;
+      break;
+    case "54":
+      select.value = 10;
+      break;
+    default:
+      // unknown code
+      break;
+  }
+
+}
+
+function setRamSize(ramSize){
+  var select = document.getElementById('ramSizeSelect');
+  switch (ramSize){
+ //    00h - None
+ // 01h - 2 KBytes
+ // 02h - 8 Kbytes
+ // 03h - 32 KBytes (4 banks of 8KBytes each)
+ // 04h - 128 KBytes (16 banks of 8KBytes each)
+ // 05h - 64 KBytes (8 banks of 8KBytes each)
+    case "00":
+      select.value = 0;
+      break;
+    case "01":
+      select.value = 1;
+      break;
+    case "02":
+      select.value = 2;
+      break;
+    case "03":
+      select.value = 3;
+      break;
+    case "04":
+      select.value = 4;
+      break;
+    case "05":
+      select.value = 5;
+      break;
+    default:
+      // unknown code
+      break;
+  }
+}
+
+function setDestinationCode(destinationCode){
+  var check = document.getElementById('destinationCheckbox');
+  if (destinationCode === "00"){
+    check.checked = true;
+  } else if (destinationCode === "01"){
+    check.checked = false;
+  } else {
+    // undefined behavior
+    console.log("UNKNOWN DESTINATION CODE")
+  }
 }
 
 // String.prototype.reverse = function() {
