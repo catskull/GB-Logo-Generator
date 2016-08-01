@@ -508,16 +508,38 @@ String.prototype.hexEncode = function(){
 
 function parseUploadedHexString(hexString){
   // first, trim the string to only contain header
-  header = hexString.substr(516, 158);
+  header = hexString.substr(512, 158);
   console.log("All data: " + header);
   nonsense = hexString.substr(0, 100);
-  entryPoint = hexString.substr(516, 4);
+  entryPoint = hexString.substr(512, 8);
   nintendoLogo = hexString.substr(520, 96);
-  title = hexString.substr(616, 32);
+  title = hexString.substr(616, 22);
+  manufacturerCode = hexString.substr(638, 8);
+  cgbFlag = hexString.substr(646, 2);
+  newLisenceeCode = hexString.substr(648, 4);
+  sgbFlag = hexString.substr(652, 2);
+  cartridgeType = hexString.substr(654, 2);
+  romSize = hexString.substr(656, 2);
+  ramSize = hexString.substr(658, 2);
+  destinationCode = hexString.substr(660, 2);
+  oldLisenceeCode = hexString.substr(662, 2);
+  romVersionNumber = hexString.substr(664, 2);
   console.log("ENTRY POINT: " + entryPoint);
   console.log("LOGO DATA: " + nintendoLogo);
   console.log("TITLE: " + title);
   console.log("TITLE DECODED: " + title.getASCIIFromHex());
+  console.log("MANUFACTURER CODE: " + manufacturerCode);
+  console.log("MANUFACTURER CODE DECODED: " + manufacturerCode.getASCIIFromHex());
+  console.log("CGB FLAG: " + cgbFlag);
+  console.log("NEW LISENCEE CODE: " + newLisenceeCode);
+  console.log("NEW LISENCEE CODE DECODED: " + newLisenceeCode.getASCIIFromHex());
+  console.log("SGB FLAG: " + sgbFlag);
+  console.log("CARTRIDGE TYPE: " + cartridgeType);
+  console.log("ROM SIZE: " + romSize);
+  console.log("RAM SIZE: " + ramSize);
+  console.log("DESTINATION CODE: " + destinationCode);
+  console.log("OLD LISENCEE CODE: " + oldLisenceeCode);
+  console.log("ROM VERSION NUMBER: " + romVersionNumber);
 }
 
 // String.prototype.reverse = function() {

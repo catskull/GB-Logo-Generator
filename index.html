@@ -432,11 +432,12 @@
     <label for="manufacturerInput">Manufacturer Code</label>
     <input type="text" class="form-control" id="manufacturerInput" placeholder="4 character manufacturer code" maxlength="4">
   </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Gameboy Color?
-    </label>
-  </div>
+  <select>
+    <option value="" disabled selected>Select CGB Support</option>
+    <option>No CGB Support</option>
+    <option>CGB Support</option>
+    <option>CGB Only</option>
+  </select>
   <div class="form-group">
     <label for="manufacturerInput">New Licensee Code</label>
     <input type="text" class="form-control" id="manufacturerInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
@@ -524,7 +525,7 @@
       <button type="button" class="btn btn-secondary" onClick="resetLogo();">Reset Logo</button>
       <!-- Interestingly, if you give the label a class of btn-secondary, it doesn't show up right -->
       <label class="btn btn-primary btn-file">
-        Upload ROM <input type="file" accept=".gb" style="display: none;"> <div id="result"></div>
+        Upload ROM <input type="file" accept=".gb, .gbc" style="display: none;"> <div id="result"></div>
       </label>
       <button type="button" class="btn btn-primary" onClick="downloadFile()">Download ROM</button>
     </div>
