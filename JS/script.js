@@ -453,9 +453,7 @@ $(function() {
       $(':file').on('fileselect', function(e) {
           readFile(this.files[0], function(e) {
               //manipulate with result...
-              // console.log("Raw binary string: " + e.target.result);
-              console.log("Converting: " + e.target.result.hexEncode());
-              // $('#output_field').text(e.target.result);
+              parseUploadedHexString(e.target.result.hexEncode());
           });
 
       });
@@ -491,6 +489,7 @@ $(function() {
 
 });
 
+// THIS FUNCTION NEEDS TO BE CLEANED UP!!!!
 String.prototype.hexEncode = function(){
     var hex, i;
 
@@ -505,4 +504,35 @@ String.prototype.hexEncode = function(){
     }
 
     return result
+}
+
+function parseUploadedHexString(hexString){
+  // first, trim the string to only contain header
+  header = hexString.substr(516, 158);
+  console.log("All data: " + header);
+  nonsense = hexString.substr(0, 100);
+  entryPoint = hexString.substr(516, 4);
+  nintendoLogo = hexString.substr(520, 96);
+  title = hexString.substr(616, 32);
+  console.log("ENTRY POINT: " + entryPoint);
+  console.log("LOGO DATA: " + nintendoLogo);
+  console.log("TITLE: " + title);
+  console.log("TITLE DECODED: " + title.getASCIIFromHex());
+}
+
+// String.prototype.reverse = function() {
+//   returnVal = "";
+//   for (i = this.length - 1; i >= 0; i--){
+//     returnVal += this[i];
+//   }
+//   return returnVal;
+// }
+
+String.prototype.getASCIIFromHex = function() {
+  returnString = "";
+  // read the hex string two characters at a time
+  for (i = 0; i < this.length; i += 2) {
+    returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
+  }
+  return returnString;
 }
