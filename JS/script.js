@@ -172,7 +172,7 @@ function downloadFile(){
   a.download = "logo.gb";
   a.dispatchEvent(clickEvent);
   setTimeout(function(){
-    document.body.removeChild(a);
+    // document.body.removeChild(a);
     window.URL.revokeObjectURL(textFile);
   }, 100);
 }
@@ -396,6 +396,10 @@ function loadLogo(hexData){
   }
 }
 
+function resetLogo(){
+  loadLogo("CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+}
+
 function isValidHexValue(x){
   var validValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
   for (var i = 0; i < validValues.length; i++) {
@@ -409,4 +413,126 @@ function clearTable(){
   for (x = 0; x < list.length; x++){
     list[x].style.backgroundColor = "white";
   }
+}
+
+function checkValidLogo(){
+  // If the logo has changed, warn that the rom will not boot
+}
+
+function generateHeaderData(){
+  // Using all the fields, generate a header
+}
+
+function uploadROM(){
+  // Allow user to upload ROM and fill in data fields
+
+}
+
+// document.querySelector('input').addEventListener('change', function(){
+//     var reader = new FileReader();
+//     reader.onload = function(){
+//         var binaryString = this.result;
+//         document.querySelector('#result').innerHTML = binaryString;
+//         console.log(binaryString);
+//         }
+//     reader.readAsBinaryString(this.files[0]);
+//   }, false);
+
+$(function() {
+
+  // We can attach the `fileselect` event to all file inputs on the page
+  $(document).on('change', ':file', function() {
+    var input = $(this);//,
+    //     numFiles = input.get(0).files ? input.get(0).files.length : 1,
+    //     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect');
+  });
+
+// You have to use callbacks, otherwise you will try to read a result that isn't ready
+  $(document).ready(function(){
+      $(':file').on('fileselect', function(e) {
+          readFile(this.files[0], function(e) {
+              //manipulate with result...
+              parseUploadedHexString(e.target.result.hexEncode());
+          });
+
+      });
+  });
+
+  function readFile(file, callback){
+      var reader = new FileReader();
+      reader.onload = callback
+      reader.readAsBinaryString(file);
+  }
+
+
+  // // We can watch for our custom `fileselect` event like this
+  // $(document).ready( function() {
+  //   var reader = new FileReader();
+  //     $(':file').on('fileselect', function(event, numFiles, label) {
+  //
+  //       var f = this.files[0];
+  //       reader.readAsText(f);
+  //       console.log(reader.result);
+  //
+  //         var input = $(this).parents('.input-group').find(':text'),
+  //             log = numFiles > 1 ? numFiles + ' files selected' : label;
+  //
+  //         if( input.length ) {
+  //             input.val(log);
+  //         } else if( log ){
+  //             console.log(log);
+  //         }
+  //
+  //     });
+  // });
+
+});
+
+// THIS FUNCTION NEEDS TO BE CLEANED UP!!!!
+String.prototype.hexEncode = function(){
+    var hex, i;
+
+    var result = "";
+    var temp = "";
+    for (i=0; i<this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        temp = ("000"+hex).slice(-4);
+        temp = temp.substr(2,3);
+        temp = temp.toUpperCase();
+        result += temp;
+    }
+
+    return result
+}
+
+function parseUploadedHexString(hexString){
+  // first, trim the string to only contain header
+  header = hexString.substr(516, 158);
+  console.log("All data: " + header);
+  nonsense = hexString.substr(0, 100);
+  entryPoint = hexString.substr(516, 4);
+  nintendoLogo = hexString.substr(520, 96);
+  title = hexString.substr(616, 32);
+  console.log("ENTRY POINT: " + entryPoint);
+  console.log("LOGO DATA: " + nintendoLogo);
+  console.log("TITLE: " + title);
+  console.log("TITLE DECODED: " + title.getASCIIFromHex());
+}
+
+// String.prototype.reverse = function() {
+//   returnVal = "";
+//   for (i = this.length - 1; i >= 0; i--){
+//     returnVal += this[i];
+//   }
+//   return returnVal;
+// }
+
+String.prototype.getASCIIFromHex = function() {
+  returnString = "";
+  // read the hex string two characters at a time
+  for (i = 0; i < this.length; i += 2) {
+    returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
+  }
+  return returnString;
 }
