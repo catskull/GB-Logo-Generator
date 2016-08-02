@@ -1,21 +1,20 @@
 var mouseDown = false;
 var blackFlag = false;
 var lastElement = null;
-//var tmp = 0x00;
-//var bitFlag = 0;
-//var total = [];
-//var strings = [];
-//var position = 0;
-//var bgColor;
+var logoHex = "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E";
 
+// When the user left clicks, set mouseDown flag
 document.onmousedown = function() {
   mouseDown = true;
 };
 
+// When the user releases the left button, set mouseDown flag
 document.onmouseup = function() {
   mouseDown = false;
 };
 
+// When the user hovers the mouse over something and the mouse is down,
+// color it
 function mouseOverHandler(element){
   if (mouseDown){
     if (blackFlag){
@@ -26,11 +25,13 @@ function mouseOverHandler(element){
   }
 }
 
+// When the mouse is pressed over an element...
 function mouseDownHandler(element){
   fill(element);
   setBlackFlag(element);
 }
 
+// When the black flag is set over an element...
 function setBlackFlag(element){
   if (element.style.backgroundColor == "black"){
     blackFlag = true;
@@ -39,6 +40,7 @@ function setBlackFlag(element){
   }
 }
 
+// Fill the element
 function fill(element){
   if (element.style.backgroundColor == "black"){
     element.style.backgroundColor = "white";
@@ -47,6 +49,7 @@ function fill(element){
   }
 }
 
+// Changes the color of all cells
 function invertLogo() {
   var list = document.getElementsByTagName("TD");
   for (var i = 0; i < list.length; i++){
@@ -54,6 +57,7 @@ function invertLogo() {
   }
 }
 
+// Gets the state of the logo, and coverts it to a hex string
 function convertToHex(){
   var list = document.getElementsByTagName("TD");
   var hexString = "";
@@ -96,16 +100,16 @@ function convertToHex(){
       }
     }
     // the bottom is added to the string first, then the top
-    hexString += convertIntToChar(toptop);
-    hexString += convertIntToChar(topbottom);
-    hexString += convertIntToChar(bottomtop);
-    hexString += convertIntToChar(bottombottom);
+    hexString += convertIntToHexChar(toptop);
+    hexString += convertIntToHexChar(topbottom);
+    hexString += convertIntToHexChar(bottomtop);
+    hexString += convertIntToHexChar(bottombottom);
   }
   return hexString;
 }
 
-// really basic function. May be kind of crappy.
-function convertIntToChar(x){
+// Converts a decimal int to its representative hex character
+function convertIntToHexChar(x){
   switch (x){
     case 0:
       return "0";
@@ -142,6 +146,7 @@ function convertIntToChar(x){
   }
 }
 
+// Creates a downloadable file based on a hex string
 function downloadFile(){
   var hexdata = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001";
   hexdata += convertToHex();
@@ -179,6 +184,7 @@ function downloadFile(){
 
 // precondition: string is the hex representation of bytes of data
 // with NO spaces
+// Calculates the checksum for the header data
 function calculateChecksum(string){
   var totalChecksum = "";
   var firstChecksum = 0;
@@ -211,11 +217,12 @@ function calculateChecksum(string){
   }
   // at the very end, convert the checksum ints to chars and put them
   // together. NOTE: checksum should always be a single byte
-  totalChecksum += convertIntToChar(firstChecksum);
-  totalChecksum += convertIntToChar(secondChecksum);
+  totalChecksum += convertIntToHexChar(firstChecksum);
+  totalChecksum += convertIntToHexChar(secondChecksum);
   return totalChecksum;
 }
 
+// Converts a hex character to its decimal int representation
 function convertCharToInt(x){
   switch (x){
     case "0":
@@ -265,10 +272,12 @@ function convertCharToInt(x){
   }
 }
 
+// Performs a bitwise not operation on a decimal integer
 function invert(x){
   return 15 - x;
 }
 
+// Calculates the global checksum based on a hex string
 function calculateGlobalChecksum(string){
   var totalChecksum = "";
   var firstChecksum = 0;
@@ -310,19 +319,20 @@ function calculateGlobalChecksum(string){
       }
     }
   }
-  totalChecksum += convertIntToChar(fourthChecksum);
-  totalChecksum += convertIntToChar(thirdChecksum);
-  totalChecksum += convertIntToChar(secondChecksum);
-  totalChecksum += convertIntToChar(firstChecksum);
+  totalChecksum += convertIntToHexChar(fourthChecksum);
+  totalChecksum += convertIntToHexChar(thirdChecksum);
+  totalChecksum += convertIntToHexChar(secondChecksum);
+  totalChecksum += convertIntToHexChar(firstChecksum);
   return totalChecksum;
 }
 
+// Loads a hex representation of a logo into the editor
 function loadLogo(hexData){
   var row = new Array(4);
   var list = document.getElementsByTagName("TD");
   var formattedHexData = "";
   if (!hexData){
-    hexData = prompt("Please enter the hex data. Whitespace is ignored.", "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+    hexData = prompt("Please enter the hex data. Whitespace is ignored.", logoHex);
 
   }
   // first make sure hexData is the properlength and eliminate whitespace in the string
@@ -332,7 +342,7 @@ function loadLogo(hexData){
     }
   }
   if (formattedHexData.length == 96){
-    clearEverything();
+    clearLogo();
     // first do top half of logo
     for (x = 0; x < 48; x += 4){
       // convert 2 bytes of data
@@ -396,10 +406,12 @@ function loadLogo(hexData){
   }
 }
 
+// Resets the logo to the default "Nintendo"
 function resetLogo(){
-  loadLogo("CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E");
+  loadLogo(logoHex);
 }
 
+// Checks if a decimal integer can be converted to a hex value
 function isValidHexValue(x){
   var validValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
   for (var i = 0; i < validValues.length; i++) {
@@ -408,11 +420,17 @@ function isValidHexValue(x){
   return false;
 }
 
-function clearEverything(){
+// Blanks the logo
+function clearLogo(){
   var list = document.getElementsByTagName("TD");
   for (x = 0; x < list.length; x++){
     list[x].style.backgroundColor = "white";
   }
+}
+
+// Clears the logo and everything else
+function clearEverything(){
+  clearLogo();
   document.getElementById('titleInput').value = "";
   document.getElementById('manufacturerInput').value = "";
   document.getElementById('cgbSupportSelect').value = "";
@@ -426,36 +444,12 @@ function clearEverything(){
   document.getElementById('versionNumberInput').value = "";
 }
 
-function checkValidLogo(){
-  // If the logo has changed, warn that the rom will not boot
-}
-
-function generateHeaderData(){
-  // Using all the fields, generate a header
-}
-
-function uploadROM(){
-  // Allow user to upload ROM and fill in data fields
-
-}
-
-// document.querySelector('input').addEventListener('change', function(){
-//     var reader = new FileReader();
-//     reader.onload = function(){
-//         var binaryString = this.result;
-//         document.querySelector('#result').innerHTML = binaryString;
-//         console.log(binaryString);
-//         }
-//     reader.readAsBinaryString(this.files[0]);
-//   }, false);
-
+// jQuery functions that are used for file uploading
 $(function() {
 
   // We can attach the `fileselect` event to all file inputs on the page
   $(document).on('change', ':file', function() {
     var input = $(this);//,
-    //     numFiles = input.get(0).files ? input.get(0).files.length : 1,
-    //     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect');
   });
 
@@ -475,48 +469,10 @@ $(function() {
       reader.onload = callback
       reader.readAsBinaryString(file);
   }
-
-
-  // // We can watch for our custom `fileselect` event like this
-  // $(document).ready( function() {
-  //   var reader = new FileReader();
-  //     $(':file').on('fileselect', function(event, numFiles, label) {
-  //
-  //       var f = this.files[0];
-  //       reader.readAsText(f);
-  //       console.log(reader.result);
-  //
-  //         var input = $(this).parents('.input-group').find(':text'),
-  //             log = numFiles > 1 ? numFiles + ' files selected' : label;
-  //
-  //         if( input.length ) {
-  //             input.val(log);
-  //         } else if( log ){
-  //             console.log(log);
-  //         }
-  //
-  //     });
-  // });
-
 });
 
-// THIS FUNCTION NEEDS TO BE CLEANED UP!!!!
-String.prototype.hexEncode = function(){
-    var hex, i;
-
-    var result = "";
-    var temp = "";
-    for (i=0; i<this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        temp = ("000"+hex).slice(-4);
-        temp = temp.substr(2,3);
-        temp = temp.toUpperCase();
-        result += temp;
-    }
-
-    return result
-}
-
+// From the uploaded rom file, update the UI
+// NOTE: THIS DOES NOT LOAD THE LOGO, IT IS ASSUMED THAT IT IS STILL NINTENDO!!!!
 function parseUploadedHexString(hexString){
   // first, set variables
   nonsense = hexString.substr(0, 100);
@@ -533,7 +489,9 @@ function parseUploadedHexString(hexString){
   destinationCode = hexString.substr(660, 2);
   oldLicenceeCode = hexString.substr(662, 2);
   romVersionNumber = hexString.substr(664, 2);
-  // if old lisencee code is 33h then new lisencee code is used instead
+
+  // then update the UI
+  resetLogo();
   document.getElementById('titleInput').value = title.getASCIIFromHex();
   document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
   setCGBFlag(cgbFlag);
@@ -545,11 +503,9 @@ function parseUploadedHexString(hexString){
   setDestinationCode(destinationCode);
   document.getElementById('oldLicenseeInput').value = oldLicenceeCode;
   document.getElementById('versionNumberInput').value = romVersionNumber;
-  if (oldLicenceeCode === "33"){
-    console.log("HERE");
-  }
 }
 
+// Sets the cgb select box based on hex data
 function setCGBFlag(cgbFlag){
   console.log(cgbFlag);
   var select = document.getElementById('cgbSupportSelect');
@@ -566,6 +522,7 @@ function setCGBFlag(cgbFlag){
   }
 }
 
+// Sets the sgb checkbox based on hex data
 function setSGBFlag(sgbFlag){
   check = document.getElementById('sgbCheckbox');
   if (sgbFlag === "03"){
@@ -575,6 +532,7 @@ function setSGBFlag(sgbFlag){
   }
 }
 
+// Sets the cartridge type based on hex data
 function setCartridgeType(cartridgeType){
   var select = document.getElementById('cartridgeTypeSelect');
   switch (cartridgeType){
@@ -677,6 +635,7 @@ function setCartridgeType(cartridgeType){
   }
 }
 
+// Sets the ROM size based on hex data
 function setRomSize(romSize){
   var select = document.getElementById('romSizeSelect');
   switch (romSize){
@@ -720,15 +679,10 @@ function setRomSize(romSize){
 
 }
 
+// Sets the RAM size select box based on hex data
 function setRamSize(ramSize){
   var select = document.getElementById('ramSizeSelect');
   switch (ramSize){
- //    00h - None
- // 01h - 2 KBytes
- // 02h - 8 Kbytes
- // 03h - 32 KBytes (4 banks of 8KBytes each)
- // 04h - 128 KBytes (16 banks of 8KBytes each)
- // 05h - 64 KBytes (8 banks of 8KBytes each)
     case "00":
       select.value = 0;
       break;
@@ -753,6 +707,7 @@ function setRamSize(ramSize){
   }
 }
 
+// Sets the destination checkbox based on hex data
 function setDestinationCode(destinationCode){
   var check = document.getElementById('destinationCheckbox');
   if (destinationCode === "00"){
@@ -765,14 +720,13 @@ function setDestinationCode(destinationCode){
   }
 }
 
-// String.prototype.reverse = function() {
-//   returnVal = "";
-//   for (i = this.length - 1; i >= 0; i--){
-//     returnVal += this[i];
-//   }
-//   return returnVal;
-// }
+/*
+//
+// MODIFICATIONS TO STRING CLASS
+//
+*/
 
+// Gets the ASCII equivalent of two hex characters
 String.prototype.getASCIIFromHex = function() {
   returnString = "";
   // read the hex string two characters at a time
@@ -780,4 +734,22 @@ String.prototype.getASCIIFromHex = function() {
     returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
   }
   return returnString;
+}
+
+// THIS FUNCTION NEEDS TO BE CLEANED UP!!!!
+// Encodes a (UNICODE?) string to hex values
+String.prototype.hexEncode = function(){
+    var hex, i;
+
+    var result = "";
+    var temp = "";
+    for (i=0; i<this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        temp = ("000"+hex).slice(-4);
+        temp = temp.substr(2,3);
+        temp = temp.toUpperCase();
+        result += temp;
+    }
+
+    return result
 }
