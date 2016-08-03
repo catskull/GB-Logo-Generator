@@ -1,4 +1,5 @@
 // TODO: Change values of select fields to be the values we need so we can just grab them and go
+// TODO: Need to change extension (.gb or .gbc) based on the cgb checkbox
 
 var mouseDown = false;
 var blackFlag = false;
