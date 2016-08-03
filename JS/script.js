@@ -1,3 +1,5 @@
+// TODO: Change values of select fields to be the values we need so we can just grab them and go
+
 var mouseDown = false;
 var blackFlag = false;
 var lastElement = null;
