@@ -1,7 +1,13 @@
+// TODO: Change values of select fields to be the values we need so we can just grab them and go
+// TODO: Need to change extension (.gb or .gbc) based on the cgb checkbox
+// TODO: When user clears field data, need to clear uploadedHexData too
+// TODO: When user downloads data, need to warn if logo is not NINTENDO
+
 var mouseDown = false;
 var blackFlag = false;
 var lastElement = null;
 var logoHex = "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E";
+var uploadedHexData = "";
 
 // When the user left clicks, set mouseDown flag
 document.onmousedown = function() {
@@ -58,7 +64,7 @@ function invertLogo() {
 }
 
 // Gets the state of the logo, and coverts it to a hex string
-function convertToHex(){
+function convertLogoToHex(){
   var list = document.getElementsByTagName("TD");
   var hexString = "";
   var toptop = 0;
@@ -148,17 +154,33 @@ function convertIntToHexChar(x){
 
 // Creates a downloadable file based on a hex string
 function downloadFile(){
-  var hexdata = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001";
-  hexdata += convertToHex();
-  hexdata += "4C4F474F20524F4D00000000000000004353000000000101001033BB";
-  // fill up the rest of the 32kb rom with 0xFF
-  for (var i =0; i < 32432; i++){
-    hexdata += "FF";
+  // First check field values to make sure they are okay
+  var hexData = "";
+  var fieldData = getFieldValues();
+  if (fieldData === null){
+    return;
+  }
+  // if there was hex data uploaded, inject the modifications into that
+  if (uploadedHexData.length > 0){
+    // pre-header stuff
+    hexData = uploadedHexData.substr(0, 520);
+    hexData += convertLogoToHex();
+    hexData += fieldData;
+    // post-header stuff
+    hexData += uploadedHexData.substr(666, uploadedHexData.length);
+  } else { // otherwise, just create some garbage data
+    hexData = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001";
+    hexData += convertLogoToHex();
+    hexData += fieldData;
+    // fill up the rest of the 32kb rom with 0xFF
+    for (var i =0; i < 32432; i++){
+      hexData += "FF";
+    }
   }
 
-  var byteArray = new Uint8Array(hexdata.length/2);
+  var byteArray = new Uint8Array(hexData.length/2);
   for (var x = 0; x < byteArray.length; x++){
-    byteArray[x] = parseInt(hexdata.substr(x*2,2), 16);
+    byteArray[x] = parseInt(hexData.substr(x*2,2), 16);
   }
 
   var data = new Blob([byteArray], {type: "application/octet-stream"});
@@ -330,26 +352,24 @@ function calculateGlobalChecksum(string){
 function loadLogo(hexData){
   var row = new Array(4);
   var list = document.getElementsByTagName("TD");
-  var formattedHexData = "";
   if (!hexData){
     hexData = prompt("Please enter the hex data. Whitespace is ignored.", logoHex);
 
   }
   // first make sure hexData is the properlength and eliminate whitespace in the string
-  for (x = 0; x < hexData.length; x++){
-    if (isValidHexValue(hexData[x])){
-      formattedHexData += hexData[x];
-    }
+  if (!hexData.isValidHexString()){
+    alert("The hex data contained invalid characters!");
+    return;
   }
-  if (formattedHexData.length == 96){
+  if (hexData.length == 96){
     clearLogo();
     // first do top half of logo
     for (x = 0; x < 48; x += 4){
       // convert 2 bytes of data
-      row[0] = convertCharToInt(formattedHexData[x]);
-      row[1] = convertCharToInt(formattedHexData[x+1]);
-      row[2] = convertCharToInt(formattedHexData[x+2]);
-      row[3] = convertCharToInt(formattedHexData[x+3]);
+      row[0] = convertCharToInt(hexData[x]);
+      row[1] = convertCharToInt(hexData[x+1]);
+      row[2] = convertCharToInt(hexData[x+2]);
+      row[3] = convertCharToInt(hexData[x+3]);
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
@@ -375,10 +395,10 @@ function loadLogo(hexData){
     // then do bottom half
     for (x = 48; x < 96; x += 4){
       // convert 2 bytes of data
-      row[0] = convertCharToInt(formattedHexData[x]);
-      row[1] = convertCharToInt(formattedHexData[x+1]);
-      row[2] = convertCharToInt(formattedHexData[x+2]);
-      row[3] = convertCharToInt(formattedHexData[x+3]);
+      row[0] = convertCharToInt(hexData[x]);
+      row[1] = convertCharToInt(hexData[x+1]);
+      row[2] = convertCharToInt(hexData[x+2]);
+      row[3] = convertCharToInt(hexData[x+3]);
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
@@ -402,6 +422,7 @@ function loadLogo(hexData){
       }
     }
   } else {
+    // CONVERT TO MODAL
     alert("The hex data received was not the correct length!");
   }
 }
@@ -409,15 +430,6 @@ function loadLogo(hexData){
 // Resets the logo to the default "Nintendo"
 function resetLogo(){
   loadLogo(logoHex);
-}
-
-// Checks if a decimal integer can be converted to a hex value
-function isValidHexValue(x){
-  var validValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
-  for (var i = 0; i < validValues.length; i++) {
-    if (validValues[i] == x) return true;
-  }
-  return false;
 }
 
 // Blanks the logo
@@ -434,7 +446,7 @@ function clearEverything(){
   document.getElementById('titleInput').value = "";
   document.getElementById('manufacturerInput').value = "";
   document.getElementById('cgbSupportSelect').value = "";
-  document.getElementById('newLicenceeInput').value = "";
+  document.getElementById('newLicenseeInput').value = "";
   document.getElementById('sgbCheckbox').checked = false;
   document.getElementById('cartridgeTypeSelect').value = "";
   document.getElementById('romSizeSelect').value = "";
@@ -458,7 +470,8 @@ $(function() {
       $(':file').on('fileselect', function(e) {
           readFile(this.files[0], function(e) {
               //manipulate with result...
-              parseUploadedHexString(e.target.result.hexEncode());
+              uploadedHexData = e.target.result.hexEncode();
+              parseUploadedHexString(uploadedHexData);
           });
 
       });
@@ -467,47 +480,74 @@ $(function() {
   function readFile(file, callback){
       var reader = new FileReader();
       reader.onload = callback
-      reader.readAsBinaryString(file);
+      // make sure user didn't hit cancel
+      if (file != null){
+        reader.readAsBinaryString(file);
+      }
   }
 });
 
 // From the uploaded rom file, update the UI
-// NOTE: THIS DOES NOT LOAD THE LOGO, IT IS ASSUMED THAT IT IS STILL NINTENDO!!!!
 function parseUploadedHexString(hexString){
   // first, set variables
-  nonsense = hexString.substr(0, 100);
-  entryPoint = hexString.substr(512, 8);
   nintendoLogo = hexString.substr(520, 96);
   title = hexString.substr(616, 22);
   manufacturerCode = hexString.substr(638, 8);
   cgbFlag = hexString.substr(646, 2);
-  newLicenceeCode = hexString.substr(648, 4);
+  newLicenseeCode = hexString.substr(648, 4);
   sgbFlag = hexString.substr(652, 2);
   cartridgeType = hexString.substr(654, 2);
   romSize = hexString.substr(656, 2);
   ramSize = hexString.substr(658, 2);
   destinationCode = hexString.substr(660, 2);
-  oldLicenceeCode = hexString.substr(662, 2);
+  oldLicenseeCode = hexString.substr(662, 2);
   romVersionNumber = hexString.substr(664, 2);
 
   // then update the UI
-  resetLogo();
+  loadLogo(nintendoLogo);
   document.getElementById('titleInput').value = title.getASCIIFromHex();
   document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
   setCGBFlag(cgbFlag);
-  document.getElementById('newLicenceeInput').value = newLicenceeCode.getASCIIFromHex();
+  document.getElementById('newLicenseeInput').value = newLicenseeCode.getASCIIFromHex();
   setSGBFlag(sgbFlag);
   setCartridgeType(cartridgeType);
   setRomSize(romSize);
   setRamSize(ramSize);
   setDestinationCode(destinationCode);
-  document.getElementById('oldLicenseeInput').value = oldLicenceeCode;
+  document.getElementById('oldLicenseeInput').value = oldLicenseeCode;
   document.getElementById('versionNumberInput').value = romVersionNumber;
+}
+
+// Gets the title hex based on title input
+function getTitle(){
+  text = document.getElementById('titleInput').value;
+  // Do checks
+  if (text.length > 0 && text.isValidASCII()){
+    // First convert to hex string
+    var returnString = text.toHexString();
+    // And then if length is less than 22, fill in remaining hex characters with 0's
+    for (i = returnString.length; i < 22; i++){
+      returnString += "0";
+    }
+    return returnString;
+  } else {
+    return null;
+  }
+}
+
+// Gets the manufacturer ID hex based on the manufacturer input
+function getManufacturerCode(){
+  text = document.getElementById('manufacturerInput').value;
+  // Do checks
+  if (text.isLength(4) && text.isValidASCII()){
+    return text.toHexString();
+  } else {
+    return null;
+  }
 }
 
 // Sets the cgb select box based on hex data
 function setCGBFlag(cgbFlag){
-  console.log(cgbFlag);
   var select = document.getElementById('cgbSupportSelect');
   switch (cgbFlag){
     case "80":
@@ -522,13 +562,51 @@ function setCGBFlag(cgbFlag){
   }
 }
 
+// Gets the cgb select box hex data based on its value
+function getCGBFlag(){
+  var select = document.getElementById('cgbSupportSelect');
+  switch (select.value){
+    case "0":
+      return "00";
+    case "1":
+      return "80";
+    case "2":
+      return "C0";
+    default:
+      return null;
+  }
+}
+
+// Gets the new licensee hex data based on new licnesee input
+function getNewLicenseeCode(){
+  var text = document.getElementById('newLicenseeInput').value;
+  // Do checks
+  if (text.isLength(2) && text.isValidASCII()){
+    return text.toHexString();
+  } else {
+    return null;
+  }
+}
+
 // Sets the sgb checkbox based on hex data
 function setSGBFlag(sgbFlag){
-  check = document.getElementById('sgbCheckbox');
+  var check = document.getElementById('sgbCheckbox');
   if (sgbFlag === "03"){
     check.checked = true;
-  } else {
+  } else if (sgbFlag === "00") {
     check.checked = false;
+  } else {
+    // unknown sgb value
+  }
+}
+
+// Gets the sgb hex based on checkbox
+function getSGBFlag(){
+  var check = document.getElementById('sgbCheckbox');
+  if (check.checked == true){
+    return "03";
+  } else {
+    return "00";
   }
 }
 
@@ -631,7 +709,80 @@ function setCartridgeType(cartridgeType){
       break;
     default:
       // unknown code
+      console.log("UNKNOWN CARTRIDGE TYPE");
       break;
+  }
+}
+
+// Gets hex data based on cartridge type selected
+function getCartridgeType(){
+  var select = document.getElementById('cartridgeTypeSelect');
+  switch (select.value){
+    case "0":
+      return "00";
+    case "1":
+      return "01";
+    case "2":
+      return "02";
+    case "3":
+      return "03";
+    case "4":
+      return "05";
+    case "5":
+      return "06";
+    case "6":
+      return "08";
+    case "7":
+      return "09";
+    case "8":
+      return "0B";
+    case "9":
+      return "0C";
+    case "10":
+      return "0D";
+    case "11":
+      return "0F";
+    case "12":
+      return "10";
+    case "13":
+      return "11";
+    case "14":
+      return "12";
+    case "15":
+      return "13";
+    case "16":
+      return "15";
+    case "17":
+      return "16";
+    case "18":
+      return "17";
+    case "19":
+      return "19";
+    case "20":
+      return "1A";
+    case "21":
+      return "1B";
+    case "22":
+      return "1C";
+    case "23":
+      return "1D";
+    case "24":
+      return "1E";
+    case "25":
+      return "20";
+    case "26":
+      return "22";
+    case "27":
+      return "FC";
+    case "28":
+      return "FD";
+    case "29":
+      return "FE";
+    case "30":
+      return "FF";
+    default:
+      // unknown code
+      return null;
   }
 }
 
@@ -674,9 +825,41 @@ function setRomSize(romSize){
       break;
     default:
       // unknown code
+      console.log("UNKNOWN ROM SIZE");
       break;
   }
+}
 
+// Gets hex data based on ROM selection
+function getRomSize(){
+  var select = document.getElementById('romSizeSelect');
+  switch (select.value){
+    case "0":
+      return "00";
+    case "1":
+      return "01";
+    case "2":
+      return "02";
+    case "3":
+      return "03";
+    case "4":
+      return "04";
+    case "5":
+      return "05";
+    case "6":
+      return "06";
+    case "7":
+      return "07";
+    case "8":
+      return "52";
+    case "9":
+      return "53";
+    case "10":
+      return "54";
+    default:
+      // unknown code
+      return null;
+  }
 }
 
 // Sets the RAM size select box based on hex data
@@ -703,6 +886,30 @@ function setRamSize(ramSize){
       break;
     default:
       // unknown code
+      console.log("RAM SIZE UNKNOWN");
+      break;
+  }
+}
+
+// Gets hex data based on the RAM size select box
+function getRamSize(){
+  var select = document.getElementById('ramSizeSelect');
+  switch (select.value){
+    case "0":
+      return "00";
+    case "1":
+      return "01";
+    case "2":
+      return "02";
+    case "3":
+      return "03";
+    case "4":
+      return "04";
+    case "5":
+      return "05";
+    default:
+      // still at the default value which isn't valid
+      return null;
       break;
   }
 }
@@ -716,7 +923,114 @@ function setDestinationCode(destinationCode){
     check.checked = false;
   } else {
     // undefined behavior
-    console.log("UNKNOWN DESTINATION CODE")
+    console.log(check.checked);
+    console.log("UNKNOWN DESTINATION CODE");
+  }
+}
+
+// Gets hex data based on the destination checkbox
+function getDestinationCode(){
+  var check = document.getElementById('destinationCheckbox');
+  if (check.checked){
+    return "00";
+  } else {
+    return "01";
+  }
+}
+
+// Gets the old licnesee code hex based on the old licnesee input
+function getOldLicenseeCode(){
+  var text = document.getElementById('oldLicenseeInput').value;
+  // Do checks
+  if (text.isLength(2) && text.isValidHexString()){
+    return text;
+  } else {
+    return null;
+  }
+}
+
+// Gets the rom verion number hex based on the version number input
+function getRomVersionNumber(){
+  var text = document.getElementById('versionNumberInput').value;
+  // Do checks
+  if (text.isLength(2) && text.isValidHexString()){
+    return text;
+  } else {
+    return null;
+  }
+}
+
+// Retrieves the values of all fields and concatenates them into a single hex string
+// If there are any errors, simply displays a popupbox instead and returns "NULL"
+function getFieldValues(){
+  // First get data
+  var hexData = "";
+  var title = getTitle();
+  var manufacturerCode = getManufacturerCode();
+  var cgbFlag = getCGBFlag();
+  var newLicenseeCode = getNewLicenseeCode();
+  var sgbFlag = getSGBFlag();
+  var cartridgeType = getCartridgeType();
+  var romSize = getRomSize();
+  var ramSize = getRamSize();
+  var destinationCode = getDestinationCode();
+  var oldLicenseeCode = getOldLicenseeCode();
+  var romVersionNumber = getRomVersionNumber();
+  var errorString = "";
+  // Check for invalid inputs
+  if (title === null){
+    errorString = "Input for title was invalid\n";
+  }
+  if (manufacturerCode === null){
+    errorString += "Input for manufacturer code was invalid\n";
+  }
+  if (cgbFlag === null){
+    errorString += "Input for cgb flag was invalid\n";
+  }
+  if (newLicenseeCode === null){
+    errorString += "Input for new licensee code was invalid\n";
+  }
+  if (sgbFlag === null){
+    errorString += "Input for sgb flag was invalid\n";
+  }
+  if (cartridgeType === null){
+    errorString += "Input for cartridge type was invalid\n";
+  }
+  if (romSize === null){
+    errorString += "Input for rom size was invalid\n";
+  }
+  if (ramSize === null){
+    errorString += "Input for ram size was invalid\n";
+  }
+  if (destinationCode === null){
+    errorString += "Input for destination code was invalid\n";
+  }
+  if (oldLicenseeCode === null){
+    errorString += "Input for old licensee code was invalid\n";
+  }
+  if (romVersionNumber === null){
+    errorString += "Input for rom version number was invalid\n";
+  }
+  if (errorString !== ""){
+    document.getElementById('myModalBody').innerText = errorString;
+    $('#myModal').modal();
+    // alert(errorString);
+    return null;
+  } else {
+    console.log(cgbFlag);
+    console.log(newLicenseeCode);
+    hexData += title;
+    hexData += manufacturerCode;
+    hexData += cgbFlag;
+    hexData += newLicenseeCode;
+    hexData += sgbFlag;
+    hexData += cartridgeType;
+    hexData += romSize;
+    hexData += ramSize;
+    hexData += destinationCode;
+    hexData += oldLicenseeCode;
+    hexData += romVersionNumber;
+    return hexData;
   }
 }
 
@@ -752,4 +1066,45 @@ String.prototype.hexEncode = function(){
     }
 
     return result
+}
+
+String.prototype.isValidASCII = function(){
+  return /^[\x00-\x7F]*$/.test(this);
+}
+
+String.prototype.isLength = function(length){
+  if (this.length == length){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+String.prototype.toHexString = function(){
+  var returnString = "";
+  for (i = 0; i < this.length; i++){
+    returnString += this.charCodeAt(i).toString(16);
+  }
+  return returnString;
+}
+
+// Checks if a decimal integer can be converted to a hex value
+String.prototype.isValidHexString = function (){
+  var validValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
+  // go through the entire string
+  for (i = 0; i < this.length; i++){
+    // check each character in string against array
+    for (k = 0; k < validValues.length; k++) {
+      // if a match is found get out of loop
+      if (validValues[k] === this.charAt(i)){
+        break;
+      }
+    }
+    // if the characters match then restart loop
+    if (validValues[k] === this.charAt(i)){
+      break;
+    }
+    return false;
+  }
+  return true;
 }

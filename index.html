@@ -16,7 +16,7 @@
   <![endif]-->
 </head>
 
-<body onload="loadLogo('CE ED 66 66 CC 0D 00 0B 03 73 00 83 00 0C 00 0D 00 08 11 1F 88 89 00 0E DC CC 6E E6 DD DD D9 99 BB BB 67 63 6E 0E EC CC DD DC 99 9F BB B9 33 3E');">
+<body onload="loadLogo('CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E');">
   <div id="container">
     <table align="center">
       <tbody>
@@ -423,31 +423,31 @@
       </tbody>
     </table>
     <div align="center" style="padding: 20px;">
-      <form>
+      <form class="form-inline">
   <div class="form-group">
     <label for="titleInput">Title</label>
-    <input type="text" class="form-control" id="titleInput" placeholder="11 ASCII characters" maxlength="11">
+    <input type="text" class="input-xlarge" id="titleInput" placeholder="11 ASCII characters" maxlength="11">
   </div>
-  <div class="form-group">
+  <div class="form-group" align="center">
     <label for="manufacturerInput">Manufacturer Code</label>
     <input type="text" class="form-control" id="manufacturerInput" placeholder="4 character manufacturer code" maxlength="4">
   </div>
-  <select id="cgbSupportSelect">
+  <select id="cgbSupportSelect" class="form-control">
     <option value="" disabled selected>Select CGB Support</option>
     <option value=0>No CGB Support</option>
     <option value=1>CGB Support</option>
     <option value=2>CGB Only</option>
   </select>
   <div class="form-group">
-    <label for="newLicenceeInput">New Licensee Code</label>
-    <input type="text" class="form-control" id="newLicenceeInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
+    <label for="newLicenseeInput">New Licensee Code</label>
+    <input type="text" class="form-control" id="newLicenseeInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
   </div>
   <div class="checkbox">
     <label>
       <input type="checkbox" id="sgbCheckbox"> SGB?
     </label>
   </div>
-  <select id="cartridgeTypeSelect">
+  <select id="cartridgeTypeSelect" class="form-control">
     <option value="" disabled selected>Select cartridge type</option>
     <option value=0>ROM ONLY</option>
     <option value=1>MBC1</option>
@@ -481,7 +481,7 @@
     <option value=29>HuC3</option>
     <option value=30>HuC1+RAM+BATTERY</option>
   </select>
-  <select id="romSizeSelect">
+  <select id="romSizeSelect" class="form-control">
     <option value="" disabled selected>Select ROM size</option>
     <option value=0>32KByte (no ROM banking)</option>
     <option value=1>64KByte (4 banks)</option>
@@ -495,7 +495,7 @@
     <option value=9>1.2MByte (80 banks)</option>
     <option value=10>1.5MByte (96 banks)</option>
   </select>
-  <select id="ramSizeSelect">
+  <select id="ramSizeSelect" class="form-control">
     <option value="" disabled selected>Select RAM size</option>
     <option value=0>None</option>
     <option value=1>2KBytes</option>
@@ -535,23 +535,19 @@
 
   <!-- Not needed currently. -->
   <!-- Modal -->
-<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Input hex data</h4>
+        <h4 class="modal-title" id="myModalLabel">Invalid input fields</h4>
       </div>
-      <div class="modal-body">
-        <textarea id=hexdatatextbox class="form-control" placeholder="Please enter the hex data. Whitespace is ignored.">CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E</textarea>
-      </div>
+      <div class="modal-body" id="myModalBody"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="loadLogo(document.getElementById('hexdatatextbox').value);">Ok</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
   <script src="JS\jquery-3.1.0.min.js"></script>
   <script src="JS\script.js"></script>
