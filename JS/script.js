@@ -1,7 +1,7 @@
-// TODO: Need to change extension (.gb or .gbc) based on the cgb checkbox
 // TODO: When user downloads data, need to warn if logo is not NINTENDO
 // TODO: Need to recalculate checksums for download file
 // TODO: Prompt user to name download file?
+// TODO: see line 434
 
 var mouseDown = false;
 var blackFlag = false;
@@ -155,8 +155,20 @@ function convertIntToHexChar(x){
 // Creates a downloadable file based on a hex string
 function downloadFile(){
   // First check field values to make sure they are okay
-  var hexData = "";
-  var fieldData = getFieldValues();
+  var downloadOverride = false;         // if the logo data isn't okay, stops the download
+  // Check the logo
+  if (convertLogoToHex() !== LOGO_HEX){
+    downloadOverride = true;
+    $('#confirmationModal').modal();
+  }
+  if (!downloadOverride){
+    downloadROM();
+  }
+}
+
+function downloadROM(){
+  var hexData = "";                        // this is binary representation of file
+  var fieldData = getFieldValues();       // if this is null then there was an error
   if (fieldData === null){
     return;
   }
@@ -196,7 +208,12 @@ function downloadFile(){
   });
   a.style = "display: none";
   a.href = textFile;
-  a.download = "logo.gb";
+  // check the cgb box to see if the rom should have .gb or .gbc extension
+  if (document.getElementById('cgbSupportSelect').value == "00"){
+    a.download = "logo.gb";
+  } else {
+    a.download = "logo.gbc";
+  }
   a.dispatchEvent(clickEvent);
   setTimeout(function(){
     // document.body.removeChild(a);
@@ -510,7 +527,8 @@ function parseUploadedHexString(hexString){
   setManufacturerCode(manufacturerCode);
   //document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
   setCGBFlag(cgbFlag);
-  document.getElementById('newLicenseeInput').value = newLicenseeCode.getASCIIFromHex();
+  setNewLicenseeCode(newLicenseeCode);
+  //document.getElementById('newLicenseeInput').value = newLicenseeCode.getASCIIFromHex();
   setSGBFlag(sgbFlag);
   setCartridgeType(cartridgeType);
   setRomSize(romSize);
@@ -565,39 +583,34 @@ function getManufacturerCode(){
 // Sets the cgb select box based on hex data
 function setCGBFlag(cgbFlag){
   var select = document.getElementById('cgbSupportSelect');
-  switch (cgbFlag){
-    case "80":
-      select.value = 1;
-      break;
-    case "C0":
-      select.value = 2;
-      break;
-    default:
-      select.value = 0;
-      break;
-  }
+  select.value = cgbFlag;
 }
 
 // Gets the cgb select box hex data based on its value
 function getCGBFlag(){
   var select = document.getElementById('cgbSupportSelect');
-  switch (select.value){
-    case "0":
-      return "00";
-    case "1":
-      return "80";
-    case "2":
-      return "C0";
-    default:
-      return null;
+  return select.value;
+}
+
+// Gets the new lisencee code based on hex data
+function setNewLicenseeCode(code){
+  var text = document.getElementById('newLicenseeInput');
+  if (code === "0000"){
+    text.value = "NA";
+  } else {
+    text.value = manufacturerCode.getASCIIFromHex();
   }
 }
 
 // Gets the new licensee hex data based on new licnesee input
 function getNewLicenseeCode(){
-  var text = document.getElementById('newLicenseeInput').value;
+  text = document.getElementById('newLicenseeInput').value;
   // Do checks
   if (text.isLength(2) && text.isValidASCII()){
+    // If it's null then the hex should be 0000
+    if (text === "NA"){
+      return "0000"
+    }
     return text.toHexString();
   } else {
     return null;
@@ -759,8 +772,8 @@ function getFieldValues(){
     errorString += "Input for rom version number was invalid\n";
   }
   if (errorString !== ""){
-    document.getElementById('myModalBody').innerText = errorString;
-    $('#myModal').modal();
+    document.getElementById('alertModalBody').innerText = errorString;
+    $('#alertModal').modal();
     // alert(errorString);
     return null;
   } else {
