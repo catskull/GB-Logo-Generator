@@ -637,9 +637,9 @@ function getNewLicenseeCode(){
 function setSGBFlag(sgbFlag){
   var check = document.getElementById('sgbCheckbox');
   if (sgbFlag === "03"){
-    check.checked = true;
+    check.value = "1";
   } else if (sgbFlag === "00") {
-    check.checked = false;
+    check.value = "0";
   } else {
     // unknown sgb value
   }
@@ -648,7 +648,7 @@ function setSGBFlag(sgbFlag){
 // Gets the sgb hex based on checkbox
 function getSGBFlag(){
   var check = document.getElementById('sgbCheckbox');
-  if (check.checked == true){
+  if (check.value === "1"){
     return "03";
   } else {
     return "00";
@@ -695,9 +695,9 @@ function getRamSize(){
 function setDestinationCode(destinationCode){
   var check = document.getElementById('destinationCheckbox');
   if (destinationCode === "00"){
-    check.checked = true;
+    check.value = "1";
   } else if (destinationCode === "01"){
-    check.checked = false;
+    check.value = "0";
   } else {
     // undefined behavior
     throw "UNDEFINED DESTINATION CODE";
@@ -707,7 +707,7 @@ function setDestinationCode(destinationCode){
 // Gets hex data based on the destination checkbox
 function getDestinationCode(){
   var check = document.getElementById('destinationCheckbox');
-  if (check.checked){
+  if (check.value === "1"){
     return "00";
   } else {
     return "01";
