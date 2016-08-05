@@ -602,7 +602,8 @@ function setNewLicenseeCode(code){
   if (code === "0000"){
     text.value = "NA";
   } else {
-    text.value = manufacturerCode.getASCIIFromHex();
+    console.log(code);
+    text.value = code.getASCIIFromHex();
   }
 }
 
