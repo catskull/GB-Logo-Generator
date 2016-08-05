@@ -19,6 +19,17 @@ document.onmouseup = function() {
   mouseDown = false;
 };
 
+function initialize() {
+  setTableDimensions();
+  loadLogo('CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E');
+}
+
+function setTableDimensions() {
+  var div = $('#dynamicHeight');
+  var width = (div.width() * .1651376146789);
+  div.css('height', width);
+}
+
 // When the user hovers the mouse over something and the mouse is down,
 // color it
 function mouseOverHandler(element){

@@ -8,7 +8,7 @@
   <meta name="description" content="GB logo generator">
   <meta name="author" content="catskull">
 
-  <!-- <link rel="stylesheet" href="CSS\style.css?v=1.0"> -->
+  <link rel="stylesheet" href="CSS\style.css">
   <link rel="stylesheet" href="CSS\bootstrap.css">
 
   <!--[if lt IE 9]>
@@ -16,9 +16,9 @@
   <![endif]-->
 </head>
 
-<body onload="loadLogo('CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E');">
+<body onload="initialize();" onresize="setTableDimensions()">
   <div id="container">
-    <table align="center">
+    <table align="center" id="dynamicHeight">
       <tbody>
         <tr>
           <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
