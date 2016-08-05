@@ -480,11 +480,11 @@ function clearEverything(){
   document.getElementById('manufacturerInput').value = "";
   document.getElementById('cgbSupportSelect').value = "";
   document.getElementById('newLicenseeInput').value = "";
-  document.getElementById('sgbCheckbox').checked = false;
+  document.getElementById('sgbSelect').checked = false;
   document.getElementById('cartridgeTypeSelect').value = "";
   document.getElementById('romSizeSelect').value = "";
   document.getElementById('ramSizeSelect').value = "";
-  document.getElementById('destinationCheckbox').checked = false;
+  document.getElementById('destinationSelect').checked = false;
   document.getElementById('oldLicenseeInput').value = "";
   document.getElementById('versionNumberInput').value = "";
 }
@@ -613,7 +613,6 @@ function setNewLicenseeCode(code){
   if (code === "0000"){
     text.value = "NA";
   } else {
-    console.log(code);
     text.value = code.getASCIIFromHex();
   }
 }
@@ -635,24 +634,14 @@ function getNewLicenseeCode(){
 
 // Sets the sgb checkbox based on hex data
 function setSGBFlag(sgbFlag){
-  var check = document.getElementById('sgbCheckbox');
-  if (sgbFlag === "03"){
-    check.value = "1";
-  } else if (sgbFlag === "00") {
-    check.value = "0";
-  } else {
-    // unknown sgb value
-  }
+  var select = document.getElementById('sgbSelect');
+  select.value = sgbFlag;
 }
 
 // Gets the sgb hex based on checkbox
 function getSGBFlag(){
-  var check = document.getElementById('sgbCheckbox');
-  if (check.value === "1"){
-    return "03";
-  } else {
-    return "00";
-  }
+  var select = document.getElementById('sgbSelect');
+  return select.value;
 }
 
 // Sets the cartridge type based on hex data
@@ -693,25 +682,14 @@ function getRamSize(){
 
 // Sets the destination checkbox based on hex data
 function setDestinationCode(destinationCode){
-  var check = document.getElementById('destinationCheckbox');
-  if (destinationCode === "00"){
-    check.value = "1";
-  } else if (destinationCode === "01"){
-    check.value = "0";
-  } else {
-    // undefined behavior
-    throw "UNDEFINED DESTINATION CODE";
-  }
+  var select = document.getElementById('destinationSelect');
+  select.value = destinationCode;
 }
 
 // Gets hex data based on the destination checkbox
 function getDestinationCode(){
-  var check = document.getElementById('destinationCheckbox');
-  if (check.value === "1"){
-    return "00";
-  } else {
-    return "01";
-  }
+  var select = document.getElementById('destinationSelect');
+  return select.value;
 }
 
 // Gets the old licnesee code hex based on the old licnesee input

@@ -444,8 +444,8 @@
           <div class="form-group col-md-2">
             <label for="cgbSupportSelect">CGB?</label>
             <select id="cgbSupportSelect" class="form-control">
-              <option value="">Select CGB Support</option>
-              <option value="00">No CGB Support</option>
+              <option value="" disabled>Select CGB Support</option>
+              <option value="00" selected>No CGB Support</option>
               <option value="80">CGB Support</option>
               <option value="C0">CGB Only</option>
             </select>
@@ -455,17 +455,17 @@
             <input type="text" class="form-control" id="newLicenseeInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
           </div>
           <div class="form-group col-md-1">
-            <label for="sgbCheckbox">SGB?</label>
-            <select id="sgbCheckbox" class="form-control">
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+            <label for="sgbSelect">SGB?</label>
+            <select id="sgbSelect" class="form-control">
+              <option value="00" selected>No</option>
+              <option value="03">Yes</option>
             </select>
           </div>
           <div class="form-group col-md-3">
             <label for="cartridgeTypeSelect">Mapper</label>
             <select class="form-control" id="cartridgeTypeSelect">
-              <option value="" disabled selected>Select mapper</option>
-              <option value="00">ROM ONLY</option>
+              <option value="" disabled>Select mapper</option>
+              <option value="00" selected>ROM ONLY</option>
               <option value="01">MBC1</option>
               <option value="02">MBC1+RAM</option>
               <option value="03">MBC1+RAM+BATTERY</option>
@@ -503,8 +503,8 @@
           <div class="form-group col-md-3">
             <label for="romSizeSelect">ROM Size</label>
             <select id="romSizeSelect" class="form-control">
-              <option value="" disabled selected>Select ROM size</option>
-              <option value="00">32KByte (no ROM banking)</option>
+              <option value="" disabled>Select ROM size</option>
+              <option value="00" selected>32KByte (no ROM banking)</option>
               <option value="01">64KByte (4 banks)</option>
               <option value="02">128KByte (8 banks)</option>
               <option value="03">256KByte (16 banks)</option>
@@ -520,8 +520,8 @@
           <div class="form-group col-md-3">
             <label for="ramSizeSelect">RAM Size</label>
             <select id="ramSizeSelect" class="form-control">
-              <option value="" disabled selected>Select RAM size</option>
-              <option value="00">No RAM</option>
+              <option value="" disabled>Select RAM size</option>
+              <option value="00" selected>No RAM</option>
               <option value="01">2KBytes</option>
               <option value="02">8KBytes</option>
               <option value="03">32KBytes</option>
@@ -530,10 +530,10 @@
             </select>
           </div>
           <div class="form-group col-md-2">
-            <label for="destinationCheckbox">Japan?</label>
-            <select id="destinationCheckbox" class="form-control">
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+            <label for="destinationSelect">Japan?</label>
+            <select id="destinationSelect" class="form-control">
+              <option value="01" selected>No</option>
+              <option value="00">Yes</option>
             </select>
           </div>
           <div class="form-group col-md-2">
