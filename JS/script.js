@@ -2,11 +2,13 @@
 // TODO: Need to change extension (.gb or .gbc) based on the cgb checkbox
 // TODO: When user clears field data, need to clear uploadedHexData too
 // TODO: When user downloads data, need to warn if logo is not NINTENDO
+// TODO: Need to recalculate checksums for download file
+// TODO: Prompt user to name download file?
 
 var mouseDown = false;
 var blackFlag = false;
 var lastElement = null;
-var logoHex = "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E";
+var LOGO_HEX = "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E";
 var uploadedHexData = "";
 
 // When the user left clicks, set mouseDown flag
@@ -353,7 +355,7 @@ function loadLogo(hexData){
   var row = new Array(4);
   var list = document.getElementsByTagName("TD");
   if (!hexData){
-    hexData = prompt("Please enter the hex data. Whitespace is ignored.", logoHex);
+    hexData = prompt("Please enter the hex data. Whitespace is ignored.", LOGO_HEX);
 
   }
   // first make sure hexData is the properlength and eliminate whitespace in the string
@@ -429,7 +431,7 @@ function loadLogo(hexData){
 
 // Resets the logo to the default "Nintendo"
 function resetLogo(){
-  loadLogo(logoHex);
+  loadLogo(LOGO_HEX);
 }
 
 // Blanks the logo
@@ -613,305 +615,37 @@ function getSGBFlag(){
 // Sets the cartridge type based on hex data
 function setCartridgeType(cartridgeType){
   var select = document.getElementById('cartridgeTypeSelect');
-  switch (cartridgeType){
-    case "00":
-      select.value = 0;
-      break;
-    case "01":
-      select.value = 1;
-      break;
-    case "02":
-      select.value = 2;
-      break;
-    case "03":
-      select.value = 3;
-      break;
-    case "05":
-      select.value = 4;
-      break;
-    case "06":
-      select.value = 5;
-      break;
-    case "08":
-      select.value = 6;
-      break;
-    case "09":
-      select.value = 7;
-      break;
-    case "0B":
-      select.value = 8;
-      break;
-    case "0C":
-      select.value = 9;
-      break;
-    case "0D":
-      select.value = 10;
-      break;
-    case "0F":
-      select.value = 11;
-      break;
-    case "10":
-      select.value = 12;
-      break;
-    case "11":
-      select.value = 13;
-      break;
-    case "12":
-      select.value = 14;
-      break;
-    case "13":
-      select.value = 15;
-      break;
-    case "15":
-      select.value = 16;
-      break;
-    case "16":
-      select.value = 17;
-      break;
-    case "17":
-      select.value = 18;
-      break;
-    case "19":
-      select.value = 19;
-      break;
-    case "1A":
-      select.value = 20;
-      break;
-    case "1B":
-      select.value = 21;
-      break;
-    case "1C":
-      select.value = 22;
-      break;
-    case "1D":
-      select.value = 23;
-      break;
-    case "1E":
-      select.value = 24;
-      break;
-    case "20":
-      select.value = 25;
-      break;
-    case "22":
-      select.value = 26;
-      break;
-    case "FC":
-      select.value = 27;
-      break;
-    case "FD":
-      select.value = 28;
-      break;
-    case "FE":
-      select.value = 29;
-      break;
-    case "FF":
-      select.value = 30;
-      break;
-    default:
-      // unknown code
-      console.log("UNKNOWN CARTRIDGE TYPE");
-      break;
-  }
+  select.value = cartridgeType;
 }
 
 // Gets hex data based on cartridge type selected
 function getCartridgeType(){
   var select = document.getElementById('cartridgeTypeSelect');
-  switch (select.value){
-    case "0":
-      return "00";
-    case "1":
-      return "01";
-    case "2":
-      return "02";
-    case "3":
-      return "03";
-    case "4":
-      return "05";
-    case "5":
-      return "06";
-    case "6":
-      return "08";
-    case "7":
-      return "09";
-    case "8":
-      return "0B";
-    case "9":
-      return "0C";
-    case "10":
-      return "0D";
-    case "11":
-      return "0F";
-    case "12":
-      return "10";
-    case "13":
-      return "11";
-    case "14":
-      return "12";
-    case "15":
-      return "13";
-    case "16":
-      return "15";
-    case "17":
-      return "16";
-    case "18":
-      return "17";
-    case "19":
-      return "19";
-    case "20":
-      return "1A";
-    case "21":
-      return "1B";
-    case "22":
-      return "1C";
-    case "23":
-      return "1D";
-    case "24":
-      return "1E";
-    case "25":
-      return "20";
-    case "26":
-      return "22";
-    case "27":
-      return "FC";
-    case "28":
-      return "FD";
-    case "29":
-      return "FE";
-    case "30":
-      return "FF";
-    default:
-      // unknown code
-      return null;
-  }
+  return select.value;
 }
 
 // Sets the ROM size based on hex data
 function setRomSize(romSize){
   var select = document.getElementById('romSizeSelect');
-  switch (romSize){
-    case "00":
-      select.value = 0;
-      break;
-    case "01":
-      select.value = 1;
-      break;
-    case "02":
-      select.value = 2;
-      break;
-    case "03":
-      select.value = 3;
-      break;
-    case "04":
-      select.value = 4;
-      break;
-    case "05":
-      select.value = 5;
-      break;
-    case "06":
-      select.value = 6;
-      break;
-    case "07":
-      select.value = 7;
-      break;
-    case "52":
-      select.value = 8;
-      break;
-    case "53":
-      select.value = 9;
-      break;
-    case "54":
-      select.value = 10;
-      break;
-    default:
-      // unknown code
-      console.log("UNKNOWN ROM SIZE");
-      break;
-  }
+  select.value = romSize;
 }
 
 // Gets hex data based on ROM selection
 function getRomSize(){
   var select = document.getElementById('romSizeSelect');
-  switch (select.value){
-    case "0":
-      return "00";
-    case "1":
-      return "01";
-    case "2":
-      return "02";
-    case "3":
-      return "03";
-    case "4":
-      return "04";
-    case "5":
-      return "05";
-    case "6":
-      return "06";
-    case "7":
-      return "07";
-    case "8":
-      return "52";
-    case "9":
-      return "53";
-    case "10":
-      return "54";
-    default:
-      // unknown code
-      return null;
-  }
+  return select.value;
 }
 
 // Sets the RAM size select box based on hex data
 function setRamSize(ramSize){
   var select = document.getElementById('ramSizeSelect');
-  switch (ramSize){
-    case "00":
-      select.value = 0;
-      break;
-    case "01":
-      select.value = 1;
-      break;
-    case "02":
-      select.value = 2;
-      break;
-    case "03":
-      select.value = 3;
-      break;
-    case "04":
-      select.value = 4;
-      break;
-    case "05":
-      select.value = 5;
-      break;
-    default:
-      // unknown code
-      console.log("RAM SIZE UNKNOWN");
-      break;
-  }
+  select.value = ramSize;
 }
 
 // Gets hex data based on the RAM size select box
 function getRamSize(){
   var select = document.getElementById('ramSizeSelect');
-  switch (select.value){
-    case "0":
-      return "00";
-    case "1":
-      return "01";
-    case "2":
-      return "02";
-    case "3":
-      return "03";
-    case "4":
-      return "04";
-    case "5":
-      return "05";
-    default:
-      // still at the default value which isn't valid
-      return null;
-      break;
-  }
+  return select.value;
 }
 
 // Sets the destination checkbox based on hex data
