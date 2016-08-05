@@ -1,6 +1,4 @@
-// TODO: Change values of select fields to be the values we need so we can just grab them and go
 // TODO: Need to change extension (.gb or .gbc) based on the cgb checkbox
-// TODO: When user clears field data, need to clear uploadedHexData too
 // TODO: When user downloads data, need to warn if logo is not NINTENDO
 // TODO: Need to recalculate checksums for download file
 // TODO: Prompt user to name download file?
@@ -444,6 +442,7 @@ function clearLogo(){
 
 // Clears the logo and everything else
 function clearEverything(){
+  uploadedHexData = "";
   clearLogo();
   document.getElementById('titleInput').value = "";
   document.getElementById('manufacturerInput').value = "";
@@ -508,7 +507,8 @@ function parseUploadedHexString(hexString){
   // then update the UI
   loadLogo(nintendoLogo);
   document.getElementById('titleInput').value = title.getASCIIFromHex();
-  document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
+  setManufacturerCode(manufacturerCode);
+  //document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
   setCGBFlag(cgbFlag);
   document.getElementById('newLicenseeInput').value = newLicenseeCode.getASCIIFromHex();
   setSGBFlag(sgbFlag);
@@ -537,11 +537,25 @@ function getTitle(){
   }
 }
 
+// Sets the manufacturer text area based on hex data
+function setManufacturerCode(manufacturerCode){
+  var text = document.getElementById('manufacturerInput');
+  if (manufacturerCode === "00000000"){
+    text.value = "NULL";
+  } else {
+    text.value = manufacturerCode.getASCIIFromHex();
+  }
+}
+
 // Gets the manufacturer ID hex based on the manufacturer input
 function getManufacturerCode(){
   text = document.getElementById('manufacturerInput').value;
   // Do checks
   if (text.isLength(4) && text.isValidASCII()){
+    // If it's null then the hex should be 00000000
+    if (text === "NULL"){
+      return "00000000"
+    }
     return text.toHexString();
   } else {
     return null;
@@ -657,8 +671,7 @@ function setDestinationCode(destinationCode){
     check.checked = false;
   } else {
     // undefined behavior
-    console.log(check.checked);
-    console.log("UNKNOWN DESTINATION CODE");
+    throw "UNDEFINED DESTINATION CODE";
   }
 }
 
@@ -751,8 +764,6 @@ function getFieldValues(){
     // alert(errorString);
     return null;
   } else {
-    console.log(cgbFlag);
-    console.log(newLicenseeCode);
     hexData += title;
     hexData += manufacturerCode;
     hexData += cgbFlag;
