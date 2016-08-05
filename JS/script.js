@@ -1,7 +1,7 @@
-// TODO: When user downloads data, need to warn if logo is not NINTENDO
 // TODO: Need to recalculate checksums for download file
 // TODO: Prompt user to name download file?
 // TODO: see line 434
+// TODO: might want to refactor downloadFile and downloadROM so it only get field data once
 
 var mouseDown = false;
 var blackFlag = false;
@@ -155,6 +155,10 @@ function convertIntToHexChar(x){
 // Creates a downloadable file based on a hex string
 function downloadFile(){
   // First check field values to make sure they are okay
+  var fieldData = getFieldValues();
+  if (fieldData === null){
+    return;
+  }
   var downloadOverride = false;         // if the logo data isn't okay, stops the download
   // Check the logo
   if (convertLogoToHex() !== LOGO_HEX){
@@ -162,11 +166,11 @@ function downloadFile(){
     $('#confirmationModal').modal();
   }
   if (!downloadOverride){
-    downloadROM();
+    downloadROM(fieldData);
   }
 }
 
-function downloadROM(){
+function downloadROM(fieldData){
   var hexData = "";                        // this is binary representation of file
   var fieldData = getFieldValues();       // if this is null then there was an error
   if (fieldData === null){
