@@ -117,50 +117,12 @@ function convertLogoToHex(){
       }
     }
     // the bottom is added to the string first, then the top
-    hexString += convertIntToHexChar(toptop);
-    hexString += convertIntToHexChar(topbottom);
-    hexString += convertIntToHexChar(bottomtop);
-    hexString += convertIntToHexChar(bottombottom);
+    hexString += toptop.toString(16).toUpperCase();
+    hexString += topbottom.toString(16).toUpperCase();
+    hexString += bottomtop.toString(16).toUpperCase();
+    hexString += bottombottom.toString(16).toUpperCase();
   }
   return hexString;
-}
-
-// Converts a decimal int to its representative hex character
-function convertIntToHexChar(x){
-  switch (x){
-    case 0:
-      return "0";
-    case 1:
-      return "1";
-    case 2:
-      return "2";
-    case 3:
-      return "3";
-    case 4:
-      return "4";
-    case 5:
-      return "5";
-    case 6:
-      return "6";
-    case 7:
-      return "7";
-    case 8:
-      return "8";
-    case 9:
-      return "9";
-    case 10:
-      return "A";
-    case 11:
-      return "B";
-    case 12:
-      return "C";
-    case 13:
-      return "D";
-    case 14:
-      return "E";
-    case 15:
-      return "F";
-  }
 }
 
 // Creates a downloadable file based on a hex string
@@ -280,8 +242,8 @@ function calculateHeaderChecksum(hexString){
   }
   // at the very end, convert the checksum ints to chars and put them
   // together. NOTE: checksum should always be a single byte
-  totalChecksum += convertIntToHexChar(firstChecksum);
-  totalChecksum += convertIntToHexChar(secondChecksum);
+  totalChecksum += firstChecksum.toString(16).toUpperCase();
+  totalChecksum += secondChecksum.toString(16).toUpperCase();
   return totalChecksum;
 }
 
@@ -334,10 +296,10 @@ function calculateGlobalChecksum(string){
       }
     }
   }
-  totalChecksum += convertIntToHexChar(fourthChecksum);
-  totalChecksum += convertIntToHexChar(thirdChecksum);
-  totalChecksum += convertIntToHexChar(secondChecksum);
-  totalChecksum += convertIntToHexChar(firstChecksum);
+  totalChecksum += fourthChecksum.toString(16).toUpperCase();
+  totalChecksum += thirdChecksum.toString(16).toUpperCase();
+  totalChecksum += secondChecksum.toString(16).toUpperCase();
+  totalChecksum += firstChecksum.toString(16).toUpperCase();
 
   return totalChecksum;
 }
@@ -778,11 +740,11 @@ String.prototype.hexEncode = function(){
   var result = "";
   for (i=0; i<this.length; i++) {
     // hex will be a hex character, but could possibly be only one digit when we need it to be two
-    hex = this.charCodeAt(i).toString(16);
+    hex = this.charCodeAt(i).toString(16).toUpperCase();
     if (hex.isLength(1)){
       result += "0";
     }
-    result += hex.toUpperCase();
+    result += hex;
   }
   return result
 }
@@ -802,7 +764,7 @@ String.prototype.isLength = function(length){
 String.prototype.toHexString = function(){
   var returnString = "";
   for (i = 0; i < this.length; i++){
-    returnString += this.charCodeAt(i).toString(16);
+    returnString += this.charCodeAt(i).toString(16).toUpperCase();
   }
   return returnString;
 }
