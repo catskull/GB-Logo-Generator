@@ -1,7 +1,7 @@
-// TODO: Need to recalculate checksums for download file
 // TODO: Prompt user to name download file?
 // TODO: see line 434
 // TODO: might want to refactor downloadFile and downloadROM so it only get field data once
+// TODO: make it so all fields can be blank. If they are they will be read as default values
 
 var mouseDown = false;
 var blackFlag = false;
@@ -21,7 +21,7 @@ document.onmouseup = function() {
 
 function initialize() {
   setTableDimensions();
-  loadLogo('CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E');
+  loadLogo(LOGO_HEX);
 }
 
 function setTableDimensions() {
@@ -193,8 +193,12 @@ function downloadROM(fieldData){
     hexData = uploadedHexData.substr(0, 520);
     hexData += convertLogoToHex();
     hexData += fieldData;
+    // calculate header checksums
+    hexData += calculateHeaderChecksum(fieldData);
+    // calculate global checksums
+    hexData += calculateGlobalChecksum(hexData + uploadedHexData.substr(668, uploadedHexData.length));
     // post-header stuff
-    hexData += uploadedHexData.substr(666, uploadedHexData.length);
+    hexData += uploadedHexData.substr(672, uploadedHexData.length);
   } else { // otherwise, just create some garbage data
     hexData = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001";
     hexData += convertLogoToHex();
@@ -239,19 +243,19 @@ function downloadROM(fieldData){
 // precondition: string is the hex representation of bytes of data
 // with NO spaces
 // Calculates the checksum for the header data
-function calculateChecksum(string){
+function calculateHeaderChecksum(hexString){
   var totalChecksum = "";
   var firstChecksum = 0;
   var secondChecksum = 0;
   var first = 0;
   var second = 0;
   var carry = 0;
-  for (x = 0; x < string.length; x += 2){
+  for (x = 0; x < hexString.length; x += 2){
     // reset carry bit
     carry = 0;
     // get the hex values for a byte
-    var first = convertCharToInt(string[x]);
-    var second = convertCharToInt(string[x + 1]);
+    var first = convertCharToInt(hexString[x]);
+    var second = convertCharToInt(hexString[x + 1]);
     // invert them
     first = invert(first);
     second = invert(second);
@@ -332,6 +336,7 @@ function invert(x){
 }
 
 // Calculates the global checksum based on a hex string
+// The header checksum is included in this
 function calculateGlobalChecksum(string){
   var totalChecksum = "";
   var firstChecksum = 0;
@@ -342,9 +347,10 @@ function calculateGlobalChecksum(string){
   var second = 0;
   var carry = 0;
 
-  for (x = 0; x < string.length; x += 3){
-    if (x != 1002 && x != 1005){
-      first = convertCharToInt(string[x+1]);
+  for (x = 0; x < string.length; x += 2){
+    // if (x != 1002 && x != 1005){
+    if (x != 668 && x != 670){
+      first = convertCharToInt(string[x + 1]);
       second = convertCharToInt(string[x]);
       firstChecksum += first;
       if (firstChecksum > 15){
@@ -377,6 +383,7 @@ function calculateGlobalChecksum(string){
   totalChecksum += convertIntToHexChar(thirdChecksum);
   totalChecksum += convertIntToHexChar(secondChecksum);
   totalChecksum += convertIntToHexChar(firstChecksum);
+
   return totalChecksum;
 }
 
