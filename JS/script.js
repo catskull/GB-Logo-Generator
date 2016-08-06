@@ -259,8 +259,8 @@ function calculateHeaderChecksum(hexString){
     // reset carry bit
     carry = 0;
     // get the hex values for a byte
-    var first = convertCharToInt(hexString[x]);
-    var second = convertCharToInt(hexString[x + 1]);
+    var first = parseInt("0x" + hexString[x]);
+    var second = parseInt("0x" + hexString[x + 1]);
     // invert them
     first = invert(first);
     second = invert(second);
@@ -285,56 +285,6 @@ function calculateHeaderChecksum(hexString){
   return totalChecksum;
 }
 
-// Converts a hex character to its decimal int representation
-function convertCharToInt(x){
-  switch (x){
-    case "0":
-      return 0;
-    case "1":
-      return 1;
-    case "2":
-      return 2;
-    case "3":
-      return 3;
-    case "4":
-      return 4;
-    case "5":
-      return 5;
-    case "6":
-      return 6;
-    case "7":
-      return 7;
-    case "8":
-      return 8;
-    case "9":
-      return 9;
-    case "A":
-      return 10;
-    case "B":
-      return 11;
-    case "C":
-      return 12;
-    case "D":
-      return 13;
-    case "E":
-      return 14;
-    case "F":
-      return 15;
-    case "a":
-      return 10;
-    case "b":
-      return 11;
-    case "c":
-      return 12;
-    case "d":
-      return 13;
-    case "e":
-      return 14;
-    case "f":
-      return 15;
-  }
-}
-
 // Performs a bitwise not operation on a decimal integer
 function invert(x){
   return 15 - x;
@@ -355,8 +305,8 @@ function calculateGlobalChecksum(string){
   for (x = 0; x < string.length; x += 2){
     // if (x != 1002 && x != 1005){
     if (x != 668 && x != 670){
-      first = convertCharToInt(string[x + 1]);
-      second = convertCharToInt(string[x]);
+      first = parseInt("0x" + string[x + 1]);
+      second = parseInt("0x" + string[x]);
       firstChecksum += first;
       if (firstChecksum > 15){
         firstChecksum -= 16;
@@ -410,10 +360,10 @@ function loadLogo(hexData){
     // first do top half of logo
     for (x = 0; x < 48; x += 4){
       // convert 2 bytes of data
-      row[0] = convertCharToInt(hexData[x]);
-      row[1] = convertCharToInt(hexData[x+1]);
-      row[2] = convertCharToInt(hexData[x+2]);
-      row[3] = convertCharToInt(hexData[x+3]);
+      row[0] = parseInt("0x" + hexData[x]);
+      row[1] = parseInt("0x" + hexData[x+1]);
+      row[2] = parseInt("0x" + hexData[x+2]);
+      row[3] = parseInt("0x" + hexData[x+3]);
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
@@ -439,10 +389,10 @@ function loadLogo(hexData){
     // then do bottom half
     for (x = 48; x < 96; x += 4){
       // convert 2 bytes of data
-      row[0] = convertCharToInt(hexData[x]);
-      row[1] = convertCharToInt(hexData[x+1]);
-      row[2] = convertCharToInt(hexData[x+2]);
-      row[3] = convertCharToInt(hexData[x+3]);
+      row[0] = parseInt("0x" + hexData[x]);
+      row[1] = parseInt("0x" + hexData[x+1]);
+      row[2] = parseInt("0x" + hexData[x+2]);
+      row[3] = parseInt("0x" + hexData[x+3]);
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
