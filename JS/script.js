@@ -1,4 +1,3 @@
-// TODO: see line 434
 // TODO: might want to refactor downloadFile and downloadROM so it only gets field data once
 // TODO: isLength function is pointless?
 // TODO: There seems to be a problem with reuploading the same file
@@ -822,22 +821,20 @@ String.prototype.getASCIIFromHex = function() {
   return returnString;
 }
 
-// THIS FUNCTION NEEDS TO BE CLEANED UP!!!!
 // Encodes a (UNICODE?) string to hex values
 String.prototype.hexEncode = function(){
-    var hex, i;
+  var hex, i;
 
-    var result = "";
-    var temp = "";
-    for (i=0; i<this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        temp = ("000"+hex).slice(-4);
-        temp = temp.substr(2,3);
-        temp = temp.toUpperCase();
-        result += temp;
+  var result = "";
+  for (i=0; i<this.length; i++) {
+    // hex will be a hex character, but could possibly be only one digit when we need it to be two
+    hex = this.charCodeAt(i).toString(16);
+    if (hex.isLength(1)){
+      result += "0";
     }
-
-    return result
+    result += hex.toUpperCase();
+  }
+  return result
 }
 
 String.prototype.isValidASCII = function(){
