@@ -1,7 +1,8 @@
-// TODO: Prompt user to name download file?
 // TODO: see line 434
-// TODO: might want to refactor downloadFile and downloadROM so it only get field data once
-// TODO: make it so all fields can be blank. If they are they will be read as default values
+// TODO: might want to refactor downloadFile and downloadROM so it only gets field data once
+// TODO: isLength function is pointless?
+// TODO: There seems to be a problem with reuploading the same file
+// -TODO-: Prompt user to name download file?
 
 var mouseDown = false;
 var blackFlag = false;
@@ -228,10 +229,15 @@ function downloadROM(fieldData){
   a.style = "display: none";
   a.href = textFile;
   // check the cgb box to see if the rom should have .gb or .gbc extension
+  var name = document.getElementById('titleInput').value;
+  // make sure there is a name
+  if (name === ""){
+    name = "logo";
+  }
   if (document.getElementById('cgbSupportSelect').value == "00"){
-    a.download = "logo.gb";
+    a.download = name + ".gb";
   } else {
-    a.download = "logo.gbc";
+    a.download = name + ".gbc";
   }
   a.dispatchEvent(clickEvent);
   setTimeout(function(){
@@ -481,7 +487,6 @@ function clearLogo(){
 
 // Clears the logo and everything else
 function clearEverything(){
-  uploadedHexData = "";
   clearLogo();
   document.getElementById('titleInput').value = "";
   document.getElementById('manufacturerInput').value = "";
@@ -529,7 +534,9 @@ $(function() {
 
 // From the uploaded rom file, update the UI
 function parseUploadedHexString(hexString){
-  // first, set variables
+  // first clear everything
+  clearEverything();
+  // then set variables
   nintendoLogo = hexString.substr(520, 96);
   title = hexString.substr(616, 22);
   manufacturerCode = hexString.substr(638, 8);
@@ -546,7 +553,8 @@ function parseUploadedHexString(hexString){
   // then update the UI
   loadLogo(nintendoLogo);
   document.getElementById('titleInput').value = title.getASCIIFromHex();
-  setManufacturerCode(manufacturerCode);
+  document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
+  //setManufacturerCode(manufacturerCode);
   //document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
   setCGBFlag(cgbFlag);
   setNewLicenseeCode(newLicenseeCode);
@@ -572,6 +580,8 @@ function getTitle(){
       returnString += "0";
     }
     return returnString;
+  } else if (text.isLength(0)){
+    return "0000000000000000000000"
   } else {
     return null;
   }
@@ -592,11 +602,9 @@ function getManufacturerCode(){
   text = document.getElementById('manufacturerInput').value;
   // Do checks
   if (text.isLength(4) && text.isValidASCII()){
-    // If it's null then the hex should be 00000000
-    if (text === "NULL"){
-      return "00000000"
-    }
     return text.toHexString();
+  } else if (text.isLength(0)) {
+    return "00000000";
   } else {
     return null;
   }
@@ -629,11 +637,9 @@ function getNewLicenseeCode(){
   text = document.getElementById('newLicenseeInput').value;
   // Do checks
   if (text.isLength(2) && text.isValidASCII()){
-    // If it's null then the hex should be 0000
-    if (text === "NA"){
-      return "0000"
-    }
     return text.toHexString();
+  } else if (text.isLength(0)){
+    return "0000"
   } else {
     return null;
   }
@@ -705,6 +711,8 @@ function getOldLicenseeCode(){
   // Do checks
   if (text.isLength(2) && text.isValidHexString()){
     return text;
+  } else if (text.isLength(0)){
+    return "00";
   } else {
     return null;
   }
@@ -716,6 +724,8 @@ function getRomVersionNumber(){
   // Do checks
   if (text.isLength(2) && text.isValidHexString()){
     return text;
+  } else if (text.isLength(0)){
+    return "00";
   } else {
     return null;
   }
@@ -804,7 +814,10 @@ String.prototype.getASCIIFromHex = function() {
   returnString = "";
   // read the hex string two characters at a time
   for (i = 0; i < this.length; i += 2) {
-    returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
+    // ignore 00 ASCII characters
+    if (this.substr(i,2) !== "00"){
+      returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
+    }
   }
   return returnString;
 }
