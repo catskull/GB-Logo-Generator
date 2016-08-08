@@ -1,6 +1,4 @@
 // TODO: might want to refactor downloadFile and downloadROM so it only gets field data once
-// TODO: isLength function is pointless?
-// TODO: There seems to be a problem with reuploading the same file
 // -TODO-: Prompt user to name download file?
 
 var mouseDown = false;
@@ -424,6 +422,7 @@ $(function() {
   $(document).on('change', ':file', function() {
     var input = $(this);//,
     input.trigger('fileselect');
+    input.val("");
   });
 
 // You have to use callbacks, otherwise you will try to read a result that isn't ready
