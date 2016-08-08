@@ -496,7 +496,7 @@ function getTitle(){
       returnString += "0";
     }
     return returnString;
-  } else if (text.isLength(0)){
+  } else if (text.length == 0){
     return "0000000000000000000000"
   } else {
     return null;
@@ -517,9 +517,9 @@ function setManufacturerCode(manufacturerCode){
 function getManufacturerCode(){
   text = document.getElementById('manufacturerInput').value;
   // Do checks
-  if (text.isLength(4) && text.isValidASCII()){
+  if (text.length == 4 && text.isValidASCII()){
     return text.toHexString();
-  } else if (text.isLength(0)) {
+  } else if (text.length == 0) {
     return "00000000";
   } else {
     return null;
@@ -552,9 +552,9 @@ function setNewLicenseeCode(code){
 function getNewLicenseeCode(){
   text = document.getElementById('newLicenseeInput').value;
   // Do checks
-  if (text.isLength(2) && text.isValidASCII()){
+  if (text.length == 2 && text.isValidASCII()){
     return text.toHexString();
-  } else if (text.isLength(0)){
+  } else if (text.length == 0){
     return "0000"
   } else {
     return null;
@@ -625,9 +625,9 @@ function getDestinationCode(){
 function getOldLicenseeCode(){
   var text = document.getElementById('oldLicenseeInput').value;
   // Do checks
-  if (text.isLength(2) && text.isValidHexString()){
+  if (text.length == 2 && text.isValidHexString()){
     return text;
-  } else if (text.isLength(0)){
+  } else if (text.length == 0){
     return "00";
   } else {
     return null;
@@ -638,9 +638,9 @@ function getOldLicenseeCode(){
 function getRomVersionNumber(){
   var text = document.getElementById('versionNumberInput').value;
   // Do checks
-  if (text.isLength(2) && text.isValidHexString()){
+  if (text.length == 2 && text.isValidHexString()){
     return text;
-  } else if (text.isLength(0)){
+  } else if (text.length == 0){
     return "00";
   } else {
     return null;
@@ -746,7 +746,7 @@ String.prototype.hexEncode = function(){
   for (i=0; i<this.length; i++) {
     // hex will be a hex character, but could possibly be only one digit when we need it to be two
     hex = this.charCodeAt(i).toString(16).toUpperCase();
-    if (hex.isLength(1)){
+    if (hex.length == 1){
       result += "0";
     }
     result += hex;
@@ -756,14 +756,6 @@ String.prototype.hexEncode = function(){
 
 String.prototype.isValidASCII = function(){
   return /^[\x00-\x7F]*$/.test(this);
-}
-
-String.prototype.isLength = function(length){
-  if (this.length == length){
-    return true;
-  } else {
-    return false;
-  }
 }
 
 String.prototype.toHexString = function(){
