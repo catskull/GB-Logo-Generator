@@ -1,626 +1,597 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
-  <meta charset="ascii">
+    <meta charset="ascii">
 
-  <title>GB Logo</title>
-  <meta name="description" content="GB logo generator">
-  <meta name="author" content="catskull">
+    <title>GB Logo</title>
+    <meta name="description" content="GB logo generator">
+    <meta name="author" content="catskull">
 
-  <link rel="stylesheet" href="CSS\style.css">
-  <link rel="stylesheet" href="CSS\bootstrap.css">
-  <link rel="stylesheet" href="CSS\mfb.css">
-  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="CSS\style.css">
+    <link rel="stylesheet" href="CSS\bootstrap.css">
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAoaGhAEdHRwCcnJwAYL2LAJ6engBhY2IAsLCwAKurqwCWlpYAAAD/AI+PjwCRkZEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEYiIgAAAAAARCwlYAAAAAIEwMDWAAAAAgzM1NYAAAACBA1isgAAAABAAVVpQAAAAEQVYVVAAAAARUiIlUAAAABVkREZQAAAAhWRERoAAAACFZERGgAAAAAiCIihwAAAAAAAAAAAAAAAAAAAAAAD//wAA8B8AAOAPAADgBwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA8AMAAPgHAAD//wAA" rel="icon" type="image/x-icon" />
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAoaGhAEdHRwCcnJwAYL2LAJ6engBhY2IAsLCwAKurqwCWlpYAAAD/AI+PjwCRkZEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEYiIgAAAAAARCwlYAAAAAIEwMDWAAAAAgzM1NYAAAACBA1isgAAAABAAVVpQAAAAEQVYVVAAAAARUiIlUAAAABVkREZQAAAAhWRERoAAAACFZERGgAAAAAiCIihwAAAAAAAAAAAAAAAAAAAAAAD//wAA8B8AAOAPAADgBwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA8AMAAPgHAAD//wAA"
+        rel="icon" type="image/x-icon" />
 </head>
 
 <body onload="initialize();" onresize="setTableDimensions()">
-  <div id="container">
-    <table align="center" id="dynamicHeight">
-      <tbody>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-        <tr>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-          <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
-        </tr>
-      </tbody>
-    </table>
-    <div align="center" style="padding: 20px;">
-      <button type="button" class="btn btn-secondary btn-lg" onclick="invertLogo();">Invert</button>
-      <button type="button" class="btn btn-secondary btn-lg" onclick="clearLogo();">Clear</button>
-      <!-- <button type="button" class="btn btn-secondary" onClick="loadLogo();">Load</button> -->
-      <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Load</button> -->
-      <button type="button" class="btn btn-secondary btn-lg" onClick="resetLogo();">Reset Logo</button>
-    </div>
-    <div align="center" style="padding: 20px;">
-      <!-- <form class="form-inline"> -->
-      <form>
-        <div class=row>
-          <div class="form-group col-md-3">
-            <label for="titleInput">Title</label>
-            <input type="text" class="form-control input-xlarge" id="titleInput" placeholder="11 ASCII characters" maxlength="11">
-          </div>
-          <div class="form-group col-md-1">
-            <label for="manufacturerInput">Manufacturer</label>
-            <input type="text" class="form-control" id="manufacturerInput" placeholder="4 character manufacturer code" maxlength="4">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="cgbSupportSelect">CGB?</label>
-            <select id="cgbSupportSelect" class="form-control">
-              <option value="" disabled>Select CGB Support</option>
-              <option value="00" selected>No CGB Support</option>
-              <option value="80">CGB Support</option>
-              <option value="C0">CGB Only</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="newLicenseeInput" style="white-space:nowrap;">New Licensee Code</label>
-            <input type="text" class="form-control" id="newLicenseeInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
-          </div>
-          <div class="form-group col-md-1">
-            <label for="sgbSelect">SGB?</label>
-            <select id="sgbSelect" class="form-control">
-              <option value="00" selected>No</option>
-              <option value="03">Yes</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="cartridgeTypeSelect">Mapper</label>
-            <select class="form-control" id="cartridgeTypeSelect">
-              <option value="" disabled>Select mapper</option>
-              <option value="00" selected>ROM ONLY</option>
-              <option value="01">MBC1</option>
-              <option value="02">MBC1+RAM</option>
-              <option value="03">MBC1+RAM+BATTERY</option>
-              <option value="05">MBC2</option>
-              <option value="06">MBC2+BATTERY</option>
-              <option value="08">ROM+RAM</option>
-              <option value="09">ROM+RAM+BATTERY</option>
-              <option value="0B">MMM01</option>
-              <option value="0C">MMM01+RAM</option>
-              <option value="0D">MMM01+RAM+BATTERY</option>
-              <option value="0F">MBC3+TIMER+BATTERY</option>
-              <option value="10">MBC3+TIMER+RAM+BATTERY</option>
-              <option value="11">MBC3</option>
-              <option value="12">MBC3+RAM</option>
-              <option value="13">MBC3+RAM+BATTERY</option>
-              <option value="15">MBC4</option>
-              <option value="16">MBC4+RAM</option>
-              <option value="17">MBC4+RAM+BATTERY</option>
-              <option value="19">MBC5</option>
-              <option value="1A">MBC5+RAM</option>
-              <option value="1B">MBC5+RAM+BATTERY</option>
-              <option value="1C">MBC5+RUMBLE</option>
-              <option value="1D">MBC5+RUMBLE+RAM</option>
-              <option value="1E">MBC5+RUMBLE+RAM+BATTERY</option>
-              <option value="20">MBC6</option>
-              <option value="22">MBC7+SENSOR+RUMBLE+RAM+BATTERY</option>
-              <option value="FC">POCKET CAMERA</option>
-              <option value="FD">BANDAI TAMA5</option>
-              <option value="FE">HuC3</option>
-              <option value="FF">HuC1+RAM+BATTERY</option>
-            </select>
-          </div>
+    <div id="container">
+        <table align="center" id="dynamicHeight">
+            <tbody>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+                <tr>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                    <td onmousedown="mouseDownHandler(this);" onmouseover="mouseOverHandler(this);"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div align="center" style="padding: 20px;">
+            <button type="button" class="btn btn-secondary btn-lg" onclick="invertLogo();">Invert</button>
+            <button type="button" class="btn btn-secondary btn-lg" onclick="clearLogo();">Clear</button>
+            <!-- <button type="button" class="btn btn-secondary" onClick="loadLogo();">Load</button> -->
+            <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Load</button> -->
+            <button type="button" class="btn btn-secondary btn-lg" onClick="resetLogo();">Reset Logo</button>
         </div>
-        <div class="row">
-          <div class="form-group col-md-3">
-            <label for="romSizeSelect">ROM Size</label>
-            <select id="romSizeSelect" class="form-control">
-              <option value="" disabled>Select ROM size</option>
-              <option value="00" selected>32KByte (no ROM banking)</option>
-              <option value="01">64KByte (4 banks)</option>
-              <option value="02">128KByte (8 banks)</option>
-              <option value="03">256KByte (16 banks)</option>
-              <option value="04">512KByte (32 banks)</option>
-              <option value="05">1MByte (64 banks)</option>
-              <option value="06">2MByte (128 banks)</option>
-              <option value="07">4MByte (256 banks)</option>
-              <option value="52">1.1MByte (72 banks)</option>
-              <option value="53">1.2MByte (80 banks)</option>
-              <option value="54">1.5MByte (96 banks)</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="ramSizeSelect">RAM Size</label>
-            <select id="ramSizeSelect" class="form-control">
-              <option value="" disabled>Select RAM size</option>
-              <option value="00" selected>No RAM</option>
-              <option value="01">2KBytes</option>
-              <option value="02">8KBytes</option>
-              <option value="03">32KBytes</option>
-              <option value="04">128KBytes</option>
-              <option value="05">64KBytes</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="destinationSelect">Japan?</label>
-            <select id="destinationSelect" class="form-control">
-              <option value="01" selected>No</option>
-              <option value="00">Yes</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="oldLicenseeInput">Old Licensee Code</label>
-            <input type="text" class="form-control" id="oldLicenseeInput" placeholder="2 hex symbols" maxlength="2">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="versionNumberInput">Mask ROM Version</label>
-            <input type="text" class="form-control" id="versionNumberInput" placeholder="2 hex symbols">
-          </div>
+        <div align="center" style="padding: 20px;">
+            <!-- <form class="form-inline"> -->
+            <form>
+                <div class=row>
+                    <div class="form-group col-md-3">
+                        <label for="titleInput">Title</label>
+                        <input type="text" class="form-control input-xlarge" id="titleInput" placeholder="11 ASCII characters" maxlength="11">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="manufacturerInput">Manufacturer</label>
+                        <input type="text" class="form-control" id="manufacturerInput" placeholder="4 character manufacturer code" maxlength="4">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="cgbSupportSelect">CGB?</label>
+                        <select id="cgbSupportSelect" class="form-control">
+                            <option value="" disabled>Select CGB Support</option>
+                            <option value="00" selected>No CGB Support</option>
+                            <option value="80">CGB Support</option>
+                            <option value="C0">CGB Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="newLicenseeInput" style="white-space:nowrap;">New Licensee Code</label>
+                        <input type="text" class="form-control" id="newLicenseeInput" placeholder="2 character ASCII code, indicating company or publisher" maxlength="2">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="sgbSelect">SGB?</label>
+                        <select id="sgbSelect" class="form-control">
+                            <option value="00" selected>No</option>
+                            <option value="03">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="cartridgeTypeSelect">Mapper</label>
+                        <select class="form-control" id="cartridgeTypeSelect">
+                            <option value="" disabled>Select mapper</option>
+                            <option value="00" selected>ROM ONLY</option>
+                            <option value="01">MBC1</option>
+                            <option value="02">MBC1+RAM</option>
+                            <option value="03">MBC1+RAM+BATTERY</option>
+                            <option value="05">MBC2</option>
+                            <option value="06">MBC2+BATTERY</option>
+                            <option value="08">ROM+RAM</option>
+                            <option value="09">ROM+RAM+BATTERY</option>
+                            <option value="0B">MMM01</option>
+                            <option value="0C">MMM01+RAM</option>
+                            <option value="0D">MMM01+RAM+BATTERY</option>
+                            <option value="0F">MBC3+TIMER+BATTERY</option>
+                            <option value="10">MBC3+TIMER+RAM+BATTERY</option>
+                            <option value="11">MBC3</option>
+                            <option value="12">MBC3+RAM</option>
+                            <option value="13">MBC3+RAM+BATTERY</option>
+                            <option value="15">MBC4</option>
+                            <option value="16">MBC4+RAM</option>
+                            <option value="17">MBC4+RAM+BATTERY</option>
+                            <option value="19">MBC5</option>
+                            <option value="1A">MBC5+RAM</option>
+                            <option value="1B">MBC5+RAM+BATTERY</option>
+                            <option value="1C">MBC5+RUMBLE</option>
+                            <option value="1D">MBC5+RUMBLE+RAM</option>
+                            <option value="1E">MBC5+RUMBLE+RAM+BATTERY</option>
+                            <option value="20">MBC6</option>
+                            <option value="22">MBC7+SENSOR+RUMBLE+RAM+BATTERY</option>
+                            <option value="FC">POCKET CAMERA</option>
+                            <option value="FD">BANDAI TAMA5</option>
+                            <option value="FE">HuC3</option>
+                            <option value="FF">HuC1+RAM+BATTERY</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="romSizeSelect">ROM Size</label>
+                        <select id="romSizeSelect" class="form-control">
+                            <option value="" disabled>Select ROM size</option>
+                            <option value="00" selected>32KByte (no ROM banking)</option>
+                            <option value="01">64KByte (4 banks)</option>
+                            <option value="02">128KByte (8 banks)</option>
+                            <option value="03">256KByte (16 banks)</option>
+                            <option value="04">512KByte (32 banks)</option>
+                            <option value="05">1MByte (64 banks)</option>
+                            <option value="06">2MByte (128 banks)</option>
+                            <option value="07">4MByte (256 banks)</option>
+                            <option value="52">1.1MByte (72 banks)</option>
+                            <option value="53">1.2MByte (80 banks)</option>
+                            <option value="54">1.5MByte (96 banks)</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="ramSizeSelect">RAM Size</label>
+                        <select id="ramSizeSelect" class="form-control">
+                            <option value="" disabled>Select RAM size</option>
+                            <option value="00" selected>No RAM</option>
+                            <option value="01">2KBytes</option>
+                            <option value="02">8KBytes</option>
+                            <option value="03">32KBytes</option>
+                            <option value="04">128KBytes</option>
+                            <option value="05">64KBytes</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="destinationSelect">Japan?</label>
+                        <select id="destinationSelect" class="form-control">
+                            <option value="01" selected>No</option>
+                            <option value="00">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="oldLicenseeInput">Old Licensee Code</label>
+                        <input type="text" class="form-control" id="oldLicenseeInput" placeholder="2 hex symbols" maxlength="2">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="versionNumberInput">Mask ROM Version</label>
+                        <input type="text" class="form-control" id="versionNumberInput" placeholder="2 hex symbols">
+                    </div>
+                </div>
+            </form>
+            <div align="center" style="padding: 20px;">
+                <!-- Interestingly, if you give the label a class of btn-secondary, it doesn't show up right -->
+                <label class="btn btn-primary btn-file btn-lg">
+                    Upload ROM
+                    <input type="file" accept=".gb, .gbc" style="display: none;" class="inputFile">
+                    <div id="result"></div>
+                </label>
+                <button type="button" class="btn btn-primary btn-lg" onClick="downloadFile()">Download ROM</button>
+            </div>
+            <a download="logo.gb" id="downloadlink" style="display:none;">Download</a>
         </div>
-      </form>
-      <div align="center" style="padding: 20px;">
-        <!-- Interestingly, if you give the label a class of btn-secondary, it doesn't show up right -->
-        <label class="btn btn-primary btn-file btn-lg">
-          Upload ROM <input type="file" accept=".gb, .gbc" style="display: none;" class="inputFile"> <div id="result"></div>
-        </label>
-        <button type="button" class="btn btn-primary btn-lg" onClick="downloadFile()">Download ROM</button>
-      </div>
-      <a download="logo.gb" id="downloadlink" style="display:none;">Download</a>
-    </div>
 
-  <!-- Alert Modal -->
-<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="alertModalLabel">Invalid input fields</h4>
-      </div>
-      <div class="modal-body" id="alertModalBody"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Ok</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- Alert Modal -->
+        <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="alertModalLabel">Invalid input fields</h4>
+                    </div>
+                    <div class="modal-body" id="alertModalBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Confirmation Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="confirmationModalLabel">WARNING</h4>
-      </div>
-      <div class="modal-body" id="confirmationModalBody">The current logo does not match the one in the boot rom. This rom will not boot on a real Gameboy.</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" onClick="downloadROM();">Proceed</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="confirmationModalLabel">WARNING</h4>
+                    </div>
+                    <div class="modal-body" id="confirmationModalBody">The current logo does not match the one in the boot rom. This rom will not boot on a real Gameboy.</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" onClick="downloadROM();">Proceed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Floating Action Button -->
-    <ul id="menu" class="mfb-component--br mfb-slidein-spring" data-mfb-toggle="hover">
-        <li class="mfb-component__wrap">
-            <a href="#" class="mfb-component__button--main">
-                <i class="mfb-component__main-icon--resting ion-plus-round"></i>
-                <i class="mfb-component__main-icon--active ion-close-round"></i>
-            </a>
-            <ul class="mfb-component__list">
-                <li>
-                    <a href="https://github.com/catskull/GB-Logo-Generator/" data-mfb-label="View on GitHub" class="mfb-component__button--child">
-                        <i class="mfb-component__child-icon"><img src="IMG\social-github2.png" width="25" height="25"></img></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/catskull/" data-mfb-label="Follow me on GitHub" class="mfb-component__button--child">
-                        <i class="mfb-component__child-icon"><img src="IMG\social-octocat.png" width="25" height="25"></img></i>
-                    </a>
-                </li>
-                <li>
-                  <a href="https://wantoo.io/gb-logo-generator/" data-mfb-label="Leave feedback" class="mfb-component__button--child">
-
-                    <i class="mfb-component__child-icon"><img src="IMG\wantoo.png" width="25" height="25"></img></i>
-                  </a
-                </li>
-            </ul>
-        </li>
-    </ul>
-
-  <script src="JS\jquery-3.1.0.min.js"></script>
-  <script src="JS\script.js"></script>
-  <script src="JS\bootstrap.js"></script>
-  <script src="JS\mfb.js"></script>
+        <script src="JS\jquery-3.1.0.min.js"></script>
+        <script src="JS\script.js"></script>
+        <script src="JS\bootstrap.js"></script>
 </body>
+
 </html>
