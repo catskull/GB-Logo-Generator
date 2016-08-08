@@ -10,6 +10,8 @@
 
   <link rel="stylesheet" href="CSS\style.css">
   <link rel="stylesheet" href="CSS\bootstrap.css">
+  <link rel="stylesheet" href="CSS\mfb.css">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -550,7 +552,7 @@
       <div align="center" style="padding: 20px;">
         <!-- Interestingly, if you give the label a class of btn-secondary, it doesn't show up right -->
         <label class="btn btn-primary btn-file btn-lg">
-          Upload ROM <input type="file" accept=".gb, .gbc" style="display: none;"> <div id="result"></div>
+          Upload ROM <input type="file" accept=".gb, .gbc" style="display: none;" class="inputFile"> <div id="result"></div>
         </label>
         <button type="button" class="btn btn-primary btn-lg" onClick="downloadFile()">Download ROM</button>
       </div>
@@ -588,8 +590,37 @@
   </div>
 </div>
 
+<!-- Floating Action Button -->
+    <ul id="menu" class="mfb-component--br mfb-slidein-spring" data-mfb-toggle="hover">
+        <li class="mfb-component__wrap">
+            <a href="#" class="mfb-component__button--main">
+                <i class="mfb-component__main-icon--resting ion-plus-round"></i>
+                <i class="mfb-component__main-icon--active ion-close-round"></i>
+            </a>
+            <ul class="mfb-component__list">
+                <li>
+                    <a href="https://github.com/catskull/GB-Logo-Generator/" data-mfb-label="View on GitHub" class="mfb-component__button--child">
+                        <i class="mfb-component__child-icon"><img src="IMG\social-github2.png" width="25" height="25"></img></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/catskull/" data-mfb-label="Follow me on GitHub" class="mfb-component__button--child">
+                        <i class="mfb-component__child-icon"><img src="IMG\social-octocat.png" width="25" height="25"></img></i>
+                    </a>
+                </li>
+                <li>
+                  <a href="https://wantoo.io/gb-logo-generator/" data-mfb-label="Leave feedback" class="mfb-component__button--child">
+
+                    <i class="mfb-component__child-icon"><img src="IMG\wantoo.png" width="25" height="25"></img></i>
+                  </a
+                </li>
+            </ul>
+        </li>
+    </ul>
+
   <script src="JS\jquery-3.1.0.min.js"></script>
   <script src="JS\script.js"></script>
   <script src="JS\bootstrap.js"></script>
+  <script src="JS\mfb.js"></script>
 </body>
 </html>

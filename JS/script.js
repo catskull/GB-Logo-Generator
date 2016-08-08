@@ -1,13 +1,14 @@
-// TODO: Prompt user to name download file?
-// TODO: see line 434
-// TODO: might want to refactor downloadFile and downloadROM so it only get field data once
-// TODO: make it so all fields can be blank. If they are they will be read as default values
+// TODO: might want to refactor downloadFile and downloadROM so it only gets field data once
+// -TODO-: Prompt user to name download file?
 
 var mouseDown = false;
 var blackFlag = false;
 var lastElement = null;
 var LOGO_HEX = "CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E";
-var uploadedHexData = "";
+var uploadedHexData = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001CEED6666CC0D000B03730083000C000D0008111F8889000EDCCC6EE6DDDDD999BBBB67636E0EECCCDDDC999FBBB9333E";
+for (var i =0; i < 32460; i++){
+  uploadedHexData += "FF";
+}
 
 // When the user left clicks, set mouseDown flag
 document.onmousedown = function() {
@@ -117,50 +118,12 @@ function convertLogoToHex(){
       }
     }
     // the bottom is added to the string first, then the top
-    hexString += convertIntToHexChar(toptop);
-    hexString += convertIntToHexChar(topbottom);
-    hexString += convertIntToHexChar(bottomtop);
-    hexString += convertIntToHexChar(bottombottom);
+    hexString += toptop.toString(16).toUpperCase();
+    hexString += topbottom.toString(16).toUpperCase();
+    hexString += bottomtop.toString(16).toUpperCase();
+    hexString += bottombottom.toString(16).toUpperCase();
   }
   return hexString;
-}
-
-// Converts a decimal int to its representative hex character
-function convertIntToHexChar(x){
-  switch (x){
-    case 0:
-      return "0";
-    case 1:
-      return "1";
-    case 2:
-      return "2";
-    case 3:
-      return "3";
-    case 4:
-      return "4";
-    case 5:
-      return "5";
-    case 6:
-      return "6";
-    case 7:
-      return "7";
-    case 8:
-      return "8";
-    case 9:
-      return "9";
-    case 10:
-      return "A";
-    case 11:
-      return "B";
-    case 12:
-      return "C";
-    case 13:
-      return "D";
-    case 14:
-      return "E";
-    case 15:
-      return "F";
-  }
 }
 
 // Creates a downloadable file based on a hex string
@@ -200,9 +163,11 @@ function downloadROM(fieldData){
     // post-header stuff
     hexData += uploadedHexData.substr(672, uploadedHexData.length);
   } else { // otherwise, just create some garbage data
+
     hexData = "C38B020000000000C38B02FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87E15F1600195E2356D5E1E9FFFFFFFFFFFFFFFFFFFFFFFFC3FD01FFFFFFFFFFC31227FFFFFFFFFFC31227FFFFFFFFFFC37E01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00C35001";
     hexData += convertLogoToHex();
     hexData += fieldData;
+    hexData += calculateHeaderChecksum(fieldData);
     // fill up the rest of the 32kb rom with 0xFF
     for (var i =0; i < 32432; i++){
       hexData += "FF";
@@ -228,10 +193,15 @@ function downloadROM(fieldData){
   a.style = "display: none";
   a.href = textFile;
   // check the cgb box to see if the rom should have .gb or .gbc extension
+  var name = document.getElementById('titleInput').value;
+  // make sure there is a name
+  if (name === ""){
+    name = "logo";
+  }
   if (document.getElementById('cgbSupportSelect').value == "00"){
-    a.download = "logo.gb";
+    a.download = name + ".gb";
   } else {
-    a.download = "logo.gbc";
+    a.download = name + ".gbc";
   }
   a.dispatchEvent(clickEvent);
   setTimeout(function(){
@@ -254,8 +224,8 @@ function calculateHeaderChecksum(hexString){
     // reset carry bit
     carry = 0;
     // get the hex values for a byte
-    var first = convertCharToInt(hexString[x]);
-    var second = convertCharToInt(hexString[x + 1]);
+    var first = parseInt("0x" + hexString[x]);
+    var second = parseInt("0x" + hexString[x + 1]);
     // invert them
     first = invert(first);
     second = invert(second);
@@ -275,59 +245,9 @@ function calculateHeaderChecksum(hexString){
   }
   // at the very end, convert the checksum ints to chars and put them
   // together. NOTE: checksum should always be a single byte
-  totalChecksum += convertIntToHexChar(firstChecksum);
-  totalChecksum += convertIntToHexChar(secondChecksum);
+  totalChecksum += firstChecksum.toString(16).toUpperCase();
+  totalChecksum += secondChecksum.toString(16).toUpperCase();
   return totalChecksum;
-}
-
-// Converts a hex character to its decimal int representation
-function convertCharToInt(x){
-  switch (x){
-    case "0":
-      return 0;
-    case "1":
-      return 1;
-    case "2":
-      return 2;
-    case "3":
-      return 3;
-    case "4":
-      return 4;
-    case "5":
-      return 5;
-    case "6":
-      return 6;
-    case "7":
-      return 7;
-    case "8":
-      return 8;
-    case "9":
-      return 9;
-    case "A":
-      return 10;
-    case "B":
-      return 11;
-    case "C":
-      return 12;
-    case "D":
-      return 13;
-    case "E":
-      return 14;
-    case "F":
-      return 15;
-    case "a":
-      return 10;
-    case "b":
-      return 11;
-    case "c":
-      return 12;
-    case "d":
-      return 13;
-    case "e":
-      return 14;
-    case "f":
-      return 15;
-  }
 }
 
 // Performs a bitwise not operation on a decimal integer
@@ -350,8 +270,8 @@ function calculateGlobalChecksum(string){
   for (x = 0; x < string.length; x += 2){
     // if (x != 1002 && x != 1005){
     if (x != 668 && x != 670){
-      first = convertCharToInt(string[x + 1]);
-      second = convertCharToInt(string[x]);
+      first = parseInt("0x" + string[x + 1]);
+      second = parseInt("0x" + string[x]);
       firstChecksum += first;
       if (firstChecksum > 15){
         firstChecksum -= 16;
@@ -379,10 +299,10 @@ function calculateGlobalChecksum(string){
       }
     }
   }
-  totalChecksum += convertIntToHexChar(fourthChecksum);
-  totalChecksum += convertIntToHexChar(thirdChecksum);
-  totalChecksum += convertIntToHexChar(secondChecksum);
-  totalChecksum += convertIntToHexChar(firstChecksum);
+  totalChecksum += fourthChecksum.toString(16).toUpperCase();
+  totalChecksum += thirdChecksum.toString(16).toUpperCase();
+  totalChecksum += secondChecksum.toString(16).toUpperCase();
+  totalChecksum += firstChecksum.toString(16).toUpperCase();
 
   return totalChecksum;
 }
@@ -405,10 +325,10 @@ function loadLogo(hexData){
     // first do top half of logo
     for (x = 0; x < 48; x += 4){
       // convert 2 bytes of data
-      row[0] = convertCharToInt(hexData[x]);
-      row[1] = convertCharToInt(hexData[x+1]);
-      row[2] = convertCharToInt(hexData[x+2]);
-      row[3] = convertCharToInt(hexData[x+3]);
+      row[0] = parseInt("0x" + hexData[x]);
+      row[1] = parseInt("0x" + hexData[x+1]);
+      row[2] = parseInt("0x" + hexData[x+2]);
+      row[3] = parseInt("0x" + hexData[x+3]);
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
@@ -434,10 +354,10 @@ function loadLogo(hexData){
     // then do bottom half
     for (x = 48; x < 96; x += 4){
       // convert 2 bytes of data
-      row[0] = convertCharToInt(hexData[x]);
-      row[1] = convertCharToInt(hexData[x+1]);
-      row[2] = convertCharToInt(hexData[x+2]);
-      row[3] = convertCharToInt(hexData[x+3]);
+      row[0] = parseInt("0x" + hexData[x]);
+      row[1] = parseInt("0x" + hexData[x+1]);
+      row[2] = parseInt("0x" + hexData[x+2]);
+      row[3] = parseInt("0x" + hexData[x+3]);
       for (y = 0; y < 4; y++){
         // set first bit
         if (Math.floor(row[y] / 8) == 1){
@@ -481,7 +401,6 @@ function clearLogo(){
 
 // Clears the logo and everything else
 function clearEverything(){
-  uploadedHexData = "";
   clearLogo();
   document.getElementById('titleInput').value = "";
   document.getElementById('manufacturerInput').value = "";
@@ -503,6 +422,7 @@ $(function() {
   $(document).on('change', ':file', function() {
     var input = $(this);//,
     input.trigger('fileselect');
+    input.val("");
   });
 
 // You have to use callbacks, otherwise you will try to read a result that isn't ready
@@ -529,7 +449,9 @@ $(function() {
 
 // From the uploaded rom file, update the UI
 function parseUploadedHexString(hexString){
-  // first, set variables
+  // first clear everything
+  clearEverything();
+  // then set variables
   nintendoLogo = hexString.substr(520, 96);
   title = hexString.substr(616, 22);
   manufacturerCode = hexString.substr(638, 8);
@@ -546,7 +468,8 @@ function parseUploadedHexString(hexString){
   // then update the UI
   loadLogo(nintendoLogo);
   document.getElementById('titleInput').value = title.getASCIIFromHex();
-  setManufacturerCode(manufacturerCode);
+  document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
+  //setManufacturerCode(manufacturerCode);
   //document.getElementById('manufacturerInput').value = manufacturerCode.getASCIIFromHex();
   setCGBFlag(cgbFlag);
   setNewLicenseeCode(newLicenseeCode);
@@ -572,6 +495,8 @@ function getTitle(){
       returnString += "0";
     }
     return returnString;
+  } else if (text.length == 0){
+    return "0000000000000000000000"
   } else {
     return null;
   }
@@ -591,12 +516,10 @@ function setManufacturerCode(manufacturerCode){
 function getManufacturerCode(){
   text = document.getElementById('manufacturerInput').value;
   // Do checks
-  if (text.isLength(4) && text.isValidASCII()){
-    // If it's null then the hex should be 00000000
-    if (text === "NULL"){
-      return "00000000"
-    }
+  if (text.length == 4 && text.isValidASCII()){
     return text.toHexString();
+  } else if (text.length == 0) {
+    return "00000000";
   } else {
     return null;
   }
@@ -628,12 +551,10 @@ function setNewLicenseeCode(code){
 function getNewLicenseeCode(){
   text = document.getElementById('newLicenseeInput').value;
   // Do checks
-  if (text.isLength(2) && text.isValidASCII()){
-    // If it's null then the hex should be 0000
-    if (text === "NA"){
-      return "0000"
-    }
+  if (text.length == 2 && text.isValidASCII()){
     return text.toHexString();
+  } else if (text.length == 0){
+    return "0000"
   } else {
     return null;
   }
@@ -703,8 +624,10 @@ function getDestinationCode(){
 function getOldLicenseeCode(){
   var text = document.getElementById('oldLicenseeInput').value;
   // Do checks
-  if (text.isLength(2) && text.isValidHexString()){
+  if (text.length == 2 && text.isValidHexString()){
     return text;
+  } else if (text.length == 0){
+    return "00";
   } else {
     return null;
   }
@@ -714,8 +637,10 @@ function getOldLicenseeCode(){
 function getRomVersionNumber(){
   var text = document.getElementById('versionNumberInput').value;
   // Do checks
-  if (text.isLength(2) && text.isValidHexString()){
+  if (text.length == 2 && text.isValidHexString()){
     return text;
+  } else if (text.length == 0){
+    return "00";
   } else {
     return null;
   }
@@ -804,45 +729,38 @@ String.prototype.getASCIIFromHex = function() {
   returnString = "";
   // read the hex string two characters at a time
   for (i = 0; i < this.length; i += 2) {
-    returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
+    // ignore 00 ASCII characters
+    if (this.substr(i,2) !== "00"){
+      returnString += String.fromCharCode(parseInt(this.substr(i,2),16));
+    }
   }
   return returnString;
 }
 
-// THIS FUNCTION NEEDS TO BE CLEANED UP!!!!
 // Encodes a (UNICODE?) string to hex values
 String.prototype.hexEncode = function(){
-    var hex, i;
+  var hex, i;
 
-    var result = "";
-    var temp = "";
-    for (i=0; i<this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        temp = ("000"+hex).slice(-4);
-        temp = temp.substr(2,3);
-        temp = temp.toUpperCase();
-        result += temp;
+  var result = "";
+  for (i=0; i<this.length; i++) {
+    // hex will be a hex character, but could possibly be only one digit when we need it to be two
+    hex = this.charCodeAt(i).toString(16).toUpperCase();
+    if (hex.length == 1){
+      result += "0";
     }
-
-    return result
+    result += hex;
+  }
+  return result
 }
 
 String.prototype.isValidASCII = function(){
   return /^[\x00-\x7F]*$/.test(this);
 }
 
-String.prototype.isLength = function(length){
-  if (this.length == length){
-    return true;
-  } else {
-    return false;
-  }
-}
-
 String.prototype.toHexString = function(){
   var returnString = "";
   for (i = 0; i < this.length; i++){
-    returnString += this.charCodeAt(i).toString(16);
+    returnString += this.charCodeAt(i).toString(16).toUpperCase();
   }
   return returnString;
 }
